@@ -26,6 +26,7 @@ Run the tests with `npm test` (Node 20+, no dependencies).
 | `tests/rules/` | Evaluator tests (`npm test`, Node 20+) |
 | `tests/vision/fixtures/` | Synthetic observation fixtures only |
 | `docs/SPEC.md` | Snapshot of the specification, v3 |
+| `docs/sanskrit-reviewer-brief.md` | Brief for the Sanskrit reviewer (TV-001 ruling, Hastasañjīvana re-keying, exclusion codes), with `docs/templates/reviewed-passage.template.json` |
 | `docs/stage2-observation-feasibility.md` | Stage 2 protocol: capture checks, labelling, metrics, go/no-go |
 | `docs/` (other) | Stage 1 review sheet and the Hastasañjīvana rights review |
 
