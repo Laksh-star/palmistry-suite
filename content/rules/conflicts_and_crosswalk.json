@@ -50,5 +50,42 @@
    "relation": "positional match, NOT an equivalence of meaning",
    "note": "Same crease, different names and meanings (Zysk 2025 p. 244). The UI must not translate 'ayu rekha' as 'life line'."
   }
+ ],
+ "translation_variants": [
+  {
+   "variant_id": "TV-001",
+   "passage": "Bṛhatsaṃhitā 68.44",
+   "original": "tisro rekhā maṇibandhanotthitāḥ karatalopagā nṛpateḥ",
+   "status": "open",
+   "renderings": [
+    {
+     "translator": "N. Chidambaram Iyer",
+     "edition": "I1",
+     "locator": "II.XXI = 68.44, p. 105",
+     "text": "If the three lines issuing from the wrist reach the middle of the palm, the person will be a king",
+     "implies": {
+      "feature": "crease.longitudinal_central",
+      "note": "three lines rising to mid-palm"
+     }
+    },
+    {
+     "translator": "K. G. Zysk",
+     "edition": "Z25",
+     "locator": "p. 257, comment on verse 26",
+     "text": "a king is the man who has three lines on the wrist",
+     "implies": {
+      "feature": "wrist.bracelet_count",
+      "in": [
+       3
+      ]
+     }
+    }
+   ],
+   "witnesses": [
+    "I2 vv. 39-41 (supports Zysk)"
+   ],
+   "reviewer": null,
+   "ruling": null
+  }
  ]
 }

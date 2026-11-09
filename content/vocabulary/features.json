@@ -1,0 +1,29 @@
+{
+ "_note": "Tradition-neutral observation features. The observation layer records only these IDs; each tradition supplies its own name for a feature. Labels marked provisional await source confirmation. CC BY-SA 4.0.",
+ "observability_classes": {
+  "photo": "assessable from a phone photo",
+  "scan_only": "assessable only from a flatbed scan",
+  "wrist_required": "assessable only when the wrist crease is in frame and uncovered",
+  "lighting_dependent": "not assessed in the MVP: depends on lighting",
+  "postponed": "not assessed in the MVP (mounts, minor markings, symbols)",
+  "not_image_assessable": "needs touch or 3-D information; never assessed",
+  "excluded": "must never be observed or used (e.g. skin colour)"
+ },
+ "features": [
+  {"id":"crease.thenar","desc":"Crease curving around the base of the thumb","observability":"photo","values":["present"],"labels":{"western":"life line (Cheiro, Benham)","indian":"provisional: father/family line (pitṛ- or gotra-rekhā); confirm from I2"}},
+  {"id":"crease.proximal_transverse","desc":"Transverse crease across the middle of the palm","observability":"photo","values":["present"],"labels":{"western":"head line","indian":"provisional: wealth/mother line (dhanamātṛ-rekhā, Z25 diagrams)"}},
+  {"id":"crease.distal_transverse","desc":"Transverse crease nearest the fingers","observability":"photo","values":["present"],"labels":{"western":"heart line","indian":"āyurekhā (Z25 p. 244). Never render as 'life line' in the Western sense."}},
+  {"id":"crease.proximal_origin_relation","desc":"Whether the proximal transverse crease starts joined to the thenar crease","observability":"photo","values":["joined","separated_narrow","separated_wide"],"labels":{"western":"head line joined to / separated from the life line","indian":null}},
+  {"id":"crease.proximal_transverse.termination","desc":"Where the proximal transverse crease ends","observability":"postponed","values":["mount_of_moon","other"],"labels":{"western":"head line termination (mounts)","indian":null}},
+  {"id":"crease.longitudinal_central","desc":"Longitudinal crease rising from the wrist toward the fingers","observability":"photo","values":["present"],"labels":{"western":"fate line (Cheiro)","indian":"ūrdhvarekhā (upward line; Hastasañjīvana 3.2.80 via Z25)"},"crosswalk":"unresolved: same crease, no source yet equates the meanings"},
+  {"id":"crease.longitudinal_central.reaches","desc":"Which finger base the longitudinal crease reaches","observability":"photo","values":["thumb","forefinger","middle","ring","little","none"],"labels":{"western":"fate line ending","indian":"ūrdhvarekhā termination"}},
+  {"id":"wrist.bracelet_count","desc":"Number of clear bracelet creases at the wrist","observability":"wrist_required","values":[0,1,2,3,4],"labels":{"western":"rascettes (not yet sourced in the corpus)","indian":"maṇibandha / yavamālā (Hastasañjīvana vv. 39–41)"}},
+  {"id":"lines.overall_depth","desc":"Overall depth and definition of the major creases","observability":"photo","values":["deep","shallow"],"labels":{"western":null,"indian":"deep, well-formed lines (BS 68.43)"}},
+  {"id":"lines.sheen","desc":"Gloss of the lines","observability":"lighting_dependent","values":["glossy","dull"],"labels":{"indian":"snigdha (BS 68.43)"}},
+  {"id":"finger.length_relative","desc":"Finger length relative to palm length","observability":"photo","values":["long","average","short"],"labels":{"western":"finger proportions (to be sourced)","indian":"long fingers (BS 68.36)"}},
+  {"id":"thumb.length_relative","desc":"Thumb tip relative to the base of the forefinger","observability":"photo","values":["long","average","short"],"labels":{"western":"thumb length (Cheiro)"}},
+  {"id":"hand.type","desc":"Overall hand and fingertip shape","observability":"postponed","values":["elementary","square","spatulate","philosophic","conic","psychic","mixed"],"labels":{"western":"seven types (d'Arpentigny)"},"note":"Postponed until Stage 2 measures whether type can be judged reliably from a photo"},
+  {"id":"palm.hollowness","desc":"Concavity of the palm","observability":"not_image_assessable","values":["hollow","flat","raised"],"labels":{"indian":"BS 68.39"}},
+  {"id":"palm.colour","desc":"Palm colour","observability":"excluded","values":[],"labels":{},"note":"Skin-colour inference is excluded by policy"}
+ ]
+}

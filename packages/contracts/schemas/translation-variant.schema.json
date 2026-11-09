@@ -1,0 +1,71 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "palmistry-suite/translation-variant.schema.json",
+ "title": "TranslationVariant",
+ "type": "object",
+ "required": [
+  "variant_id",
+  "passage",
+  "original",
+  "status",
+  "renderings"
+ ],
+ "properties": {
+  "variant_id": {
+   "type": "string",
+   "pattern": "^TV-\\d{3}$"
+  },
+  "passage": {
+   "type": "string"
+  },
+  "original": {
+   "type": "string"
+  },
+  "status": {
+   "enum": [
+    "open",
+    "resolved",
+    "kept_both"
+   ]
+  },
+  "renderings": {
+   "type": "array",
+   "minItems": 2,
+   "items": {
+    "type": "object",
+    "required": [
+     "translator",
+     "edition",
+     "locator",
+     "text",
+     "implies"
+    ]
+   }
+  },
+  "witnesses": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "reviewer": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "ruling": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "ruling_date": {
+   "type": [
+    "string",
+    "null"
+   ]
+  }
+ },
+ "description": "While open, dependent rules evaluate as withheld. The losing rendering is never deleted."
+}

@@ -1,0 +1,48 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "palmistry-suite/rule-evaluation.schema.json",
+ "title": "RuleEvaluation",
+ "type": "object",
+ "required": [
+  "rule_id",
+  "evidence_version",
+  "outcome",
+  "reason",
+  "source_passages",
+  "matched_observations"
+ ],
+ "properties": {
+  "rule_id": {
+   "type": "string"
+  },
+  "evidence_version": {
+   "type": "string"
+  },
+  "outcome": {
+   "enum": [
+    "eligible",
+    "insufficient_evidence",
+    "not_applicable",
+    "withheld"
+   ]
+  },
+  "reason": {
+   "type": "string"
+  },
+  "source_passages": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "matched_observations": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "general": {
+   "type": "boolean"
+  }
+ }
+}

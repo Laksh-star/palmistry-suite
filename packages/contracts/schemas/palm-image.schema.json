@@ -1,0 +1,85 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "palmistry-suite/palm-image.schema.json",
+ "title": "PalmImage",
+ "type": "object",
+ "required": [
+  "id",
+  "session_id",
+  "hand",
+  "capture_method",
+  "quality"
+ ],
+ "properties": {
+  "id": {
+   "type": "string"
+  },
+  "session_id": {
+   "type": "string"
+  },
+  "hand": {
+   "enum": [
+    "left",
+    "right"
+   ]
+  },
+  "dominant": {
+   "type": "boolean"
+  },
+  "capture_method": {
+   "enum": [
+    "photo",
+    "scan"
+   ]
+  },
+  "width": {
+   "type": "integer"
+  },
+  "height": {
+   "type": "integer"
+  },
+  "orientation_transform": {
+   "type": "string"
+  },
+  "exif_stripped": {
+   "const": true
+  },
+  "quality": {
+   "type": "object",
+   "required": [
+    "status"
+   ],
+   "properties": {
+    "status": {
+     "enum": [
+      "pass",
+      "limited",
+      "retake"
+     ]
+    },
+    "wrist_visible": {
+     "type": "boolean"
+    },
+    "reasons": {
+     "type": "array",
+     "items": {
+      "enum": [
+       "blur",
+       "glare",
+       "crop_fingers",
+       "crop_wrist",
+       "wrist_covered",
+       "obstruction",
+       "rotation",
+       "mirrored",
+       "low_light",
+       "scan_pressure",
+       "filter_detected"
+      ]
+     }
+    }
+   }
+  }
+ },
+ "description": "The private object key is held server-side only and never appears in this record or in agent/MCP payloads."
+}

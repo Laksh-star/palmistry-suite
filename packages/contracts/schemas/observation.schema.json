@@ -1,0 +1,75 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "palmistry-suite/observation.schema.json",
+ "title": "Observation",
+ "type": "object",
+ "required": [
+  "id",
+  "image_id",
+  "feature",
+  "state",
+  "observer_version"
+ ],
+ "properties": {
+  "id": {
+   "type": "string"
+  },
+  "image_id": {
+   "type": "string"
+  },
+  "feature": {
+   "type": "string",
+   "description": "Tradition-neutral feature ID from content/vocabulary/features.json"
+  },
+  "state": {
+   "enum": [
+    "observed",
+    "uncertain",
+    "not_assessable"
+   ]
+  },
+  "value": {},
+  "geometry": {
+   "type": "array",
+   "description": "Polyline in normalised image coordinates [0,1]",
+   "items": {
+    "type": "array",
+    "items": {
+     "type": "number",
+     "minimum": 0,
+     "maximum": 1
+    },
+    "minItems": 2,
+    "maxItems": 2
+   }
+  },
+  "image_reliability": {
+   "enum": [
+    "good",
+    "fair",
+    "low"
+   ],
+   "description": "How clearly the feature shows. NOT a probability that any reading is true."
+  },
+  "region_ids": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "limitations": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "observer_version": {
+   "type": "string",
+   "description": "model + prompt version, or 'human:<labeller-id>'"
+  },
+  "flagged": {
+   "type": "boolean"
+  }
+ },
+ "additionalProperties": false
+}

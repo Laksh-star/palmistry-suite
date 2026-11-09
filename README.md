@@ -7,7 +7,10 @@ Users submit palm photos or scans. They receive separate Indian and Western **tr
 ## Status
 - **Stage 1 (source and evidence foundation): in progress.** The corpus is approved, with sample passages, draft rules, exclusions and a rights review.
 - `prototype/` is a static, clickable walkthrough on a **synthetic demo hand**. No palm analysis runs. All rules are drafts that have not been reviewed.
+- **Stage 2 foundation is in place:** a tradition-neutral feature vocabulary, contract schemas, a deterministic evaluator with 11 passing tests, and the observation-feasibility protocol. No model is connected and no real images have been used.
 - There is no backend, MCP server or agent yet (spec stages 3–5).
+
+Run the tests with `npm test` (Node 20+, no dependencies).
 
 ## Layout
 | Path | Contents |
@@ -17,9 +20,16 @@ Users submit palm photos or scans. They receive separate Indian and Western **tr
 | `content/sources/passages.json` | Sample passages with locators, checksums, triage and exclusion reasons |
 | `content/rules/draft_rules.json` | Draft candidate rules (not reviewed) |
 | `content/rules/conflicts_and_crosswalk.json` | TV-001 (BS 68.44), the Western head-line school disagreement, and the Indian–Western crosswalk |
-| `docs/` | Stage 1 review sheet and the Hastasañjīvana rights review |
+| `content/vocabulary/features.json` | Tradition-neutral observation features, with how each can be observed and what each tradition calls it |
+| `packages/contracts/schemas/` | JSON Schemas: Observation, PalmImage, InterpretationRule, RuleEvaluation, TranslationVariant, Passage |
+| `packages/rules/evaluate.mjs` | Deterministic rule evaluator (no dependencies) and the traceability check |
+| `tests/rules/` | Evaluator tests (`npm test`, Node 20+) |
+| `tests/vision/fixtures/` | Synthetic observation fixtures only |
+| `docs/SPEC.md` | Snapshot of the specification, v3 |
+| `docs/stage2-observation-feasibility.md` | Stage 2 protocol: capture checks, labelling, metrics, go/no-go |
+| `docs/` (other) | Stage 1 review sheet and the Hastasañjīvana rights review |
 
-The authoritative specification is the Hyperagent document "Palmistry App — MVP Specification and Evidence Architecture" (cmw9b9pa2007807adf7vuy0x0, v3). The planned monorepo layout is in section 6 of the spec.
+The authoritative specification is the Hyperagent document "Palmistry App — MVP Specification and Evidence Architecture" (cmw9b9pa2007807adf7vuy0x0); `docs/SPEC.md` is a v3 snapshot of it. The planned monorepo layout is in section 6 of the spec.
 
 ## Rules that never change
 - Every personal claim traces back: claim → rule evaluation → reviewed source passage + visible observation → image region.

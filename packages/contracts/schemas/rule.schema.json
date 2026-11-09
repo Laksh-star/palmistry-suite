@@ -1,0 +1,88 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "palmistry-suite/rule.schema.json",
+ "title": "InterpretationRule",
+ "type": "object",
+ "required": [
+  "rule_id",
+  "tradition",
+  "school",
+  "derived_from",
+  "requires",
+  "draft_text",
+  "review_status"
+ ],
+ "properties": {
+  "rule_id": {
+   "type": "string",
+   "pattern": "^R-(W|I)-\\d{3}$"
+  },
+  "tradition": {
+   "enum": [
+    "Western",
+    "Indian"
+   ]
+  },
+  "school": {
+   "type": "string"
+  },
+  "derived_from": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "string"
+   }
+  },
+  "requires": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "feature"
+    ],
+    "properties": {
+     "feature": {
+      "type": "string"
+     },
+     "in": {
+      "type": "array"
+     }
+    }
+   }
+  },
+  "kind": {
+   "enum": [
+    "personal",
+    "general"
+   ]
+  },
+  "depends_on_variant": {
+   "type": "string"
+  },
+  "question_areas": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "draft_text": {
+   "type": "string"
+  },
+  "wording": {
+   "type": "string"
+  },
+  "caveat": {
+   "type": "string"
+  },
+  "open_issue": {
+   "type": "string"
+  },
+  "review_status": {
+   "enum": [
+    "draft_unreviewed",
+    "reviewed",
+    "retired"
+   ]
+  }
+ }
+}

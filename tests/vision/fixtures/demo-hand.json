@@ -1,0 +1,16 @@
+{
+ "_note": "SYNTHETIC fixture. Not derived from any real person's hand. Real evaluation images never enter this repository.",
+ "version": "ev-1",
+ "image": { "id": "img-demo-R", "hand": "right", "dominant": true, "captureMethod": "photo", "wristVisible": true },
+ "observations": [
+  {"id":"o1","feature":"crease.proximal_origin_relation","state":"observed","value":"joined"},
+  {"id":"o2","feature":"crease.thenar","state":"observed","value":"present"},
+  {"id":"o3","feature":"crease.distal_transverse","state":"observed","value":"present"},
+  {"id":"o4a","feature":"crease.longitudinal_central","state":"observed","value":"present"},
+  {"id":"o4b","feature":"crease.longitudinal_central.reaches","state":"observed","value":"middle"},
+  {"id":"o5","feature":"lines.overall_depth","state":"observed","value":"deep"},
+  {"id":"o6","feature":"wrist.bracelet_count","state":"observed","value":3},
+  {"id":"o7","feature":"finger.length_relative","state":"observed","value":"long"},
+  {"id":"o8","feature":"thumb.length_relative","state":"uncertain","value":null}
+ ]
+}

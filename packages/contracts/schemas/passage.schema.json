@@ -1,0 +1,66 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "palmistry-suite/passage.schema.json",
+ "title": "Passage",
+ "type": "object",
+ "required": [
+  "passage_id",
+  "edition",
+  "locator",
+  "quote",
+  "quote_sha256_16",
+  "triage",
+  "review_status"
+ ],
+ "properties": {
+  "passage_id": {
+   "type": "string"
+  },
+  "edition": {
+   "type": "string"
+  },
+  "locator": {
+   "type": "string"
+  },
+  "quote": {
+   "type": "string"
+  },
+  "quote_sha256_16": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{16}$"
+  },
+  "features": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "triage": {
+   "type": "string"
+  },
+  "exclusion_reason": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "school": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "note": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "locator_check": {
+   "type": "string"
+  },
+  "review_status": {
+   "type": "string"
+  }
+ }
+}
