@@ -1,0 +1,569 @@
+[
+ {
+  "passage_id": "W1-016a",
+  "edition": "W1",
+  "locator": "p. 16, ch. II 'The Line of Head joined to the Line of Life'",
+  "quote": "The position of this line indicates in all cases a highly sensitive disposition, which inclines towards the side of caution and also lacks self-confidence",
+  "quote_sha256_16": "997ab7c256be68ab",
+  "features": [
+   "W.head_line.origin=joined_to_life"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Cheiro",
+  "note": null,
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W1-019a",
+  "edition": "W1",
+  "locator": "pp. 19-20, ch. II 'The Line of Head separated from the Line of Life'",
+  "quote": "When the space is not very wide (3-3, Plate I.), it is an excellent mark to have, giving independence of thought, quickness of judgment, and a certain mental daring",
+  "quote_sha256_16": "9c1ebce049924ca5",
+  "features": [
+   "W.head_line.origin=separated_narrow"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Cheiro",
+  "note": "'not very wide' needs an operational threshold before evaluation",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W1-036a",
+  "edition": "W1",
+  "locator": "p. 36, ch. III 'The Line of Life and its Variations'",
+  "quote": "it is this intimate connection with the vital organs of the body which enables it to foretell the length of life from natural causes",
+  "quote_sha256_16": "24c4f2b33831e83b",
+  "features": [
+   "W.life_line"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "health_or_lifespan",
+  "school": "Cheiro",
+  "note": null,
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W1-036b",
+  "edition": "W1",
+  "locator": "p. 36, ch. III",
+  "quote": "to be normal the Line of Life should be long, clearly marked, and without any irregularities or breaks of any kind",
+  "quote_sha256_16": "83aac628f941c175",
+  "features": [
+   "W.life_line.clarity",
+   "W.life_line.continuity"
+  ],
+  "triage": "observation_definition_only",
+  "exclusion_reason": null,
+  "school": "Cheiro",
+  "note": "Defines 'normal' appearance; usable for the vocabulary, not as an interpretation",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W1-067a",
+  "edition": "W1",
+  "locator": "p. 67, ch. VII 'The Line of Heart'",
+  "quote": "The Line of Heart relates purely to the affectionate disposition, in fact, to the mental side of the love nature of the subject.",
+  "quote_sha256_16": "ee13121492aca8d8",
+  "features": [
+   "W.heart_line"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Cheiro",
+  "note": "General statement of what the line signifies; label general, not personal",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W1-067b",
+  "edition": "W1",
+  "locator": "p. 67, ch. VII",
+  "quote": "The Line of Heart should be deep, clear, and well coloured.",
+  "quote_sha256_16": "8975fb53d100291b",
+  "features": [
+   "W.heart_line.depth",
+   "W.heart_line.colour"
+  ],
+  "triage": "partially_excluded",
+  "exclusion_reason": "skin_colour",
+  "school": "Cheiro",
+  "note": "Keep depth/clarity; drop 'well coloured'",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W1-047a",
+  "edition": "W1",
+  "locator": "p. 47, ch. V 'The Line of Destiny or Fate'",
+  "quote": "this line undoubtedly appears to indicate at least the main events of one's career",
+  "quote_sha256_16": "7a27489c6e1f3140",
+  "features": [
+   "W.fate_line"
+  ],
+  "triage": "candidate_reframed",
+  "exclusion_reason": null,
+  "school": "Cheiro",
+  "note": "Must be rewritten as a traditional association with career themes; no event prediction or dating (ch. XIX on dates excluded: event_timing)",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W1-pviii",
+  "edition": "W1",
+  "locator": "Preface to the American edition, p. viii",
+  "quote": "The longer the thumb, the more the power of will rules the actions; the shorter the thumb, the more brute force and obstinacy sways the nature.",
+  "quote_sha256_16": "3040b731c06d9592",
+  "features": [
+   "W.thumb.length_relative"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Cheiro",
+  "note": "Needs a relative-length measure (thumb tip vs index base); harsh wording must be softened in narrative",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W2-429a",
+  "edition": "W2",
+  "locator": "pp. 429-430, 'The Line of Head'",
+  "quote": "The longer the Head line is tied to the Life line the less self-confidence has the subject and the more he relies upon the advice of others.",
+  "quote_sha256_16": "4cee399b93edbf25",
+  "features": [
+   "W.head_line.origin=joined_to_life",
+   "W.head_life_join_length"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Benham",
+  "note": null,
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W2-429b",
+  "edition": "W2",
+  "locator": "p. 430, 'The Line of Head'",
+  "quote": "The Head line is not often bound to the Life line longer than the twelfth year",
+  "quote_sha256_16": "3941d0b7a938d5de",
+  "features": [
+   "W.head_life_join_length"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "event_timing",
+  "school": "Benham",
+  "note": "Age-dating of the join; excluded under MVP (no event dates)",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W3-221",
+  "edition": "W3",
+  "locator": "p. 221, Sub-section IX 'Spatulate Hands', from ¶335 (Plate V)",
+  "quote": "In this chapter I propose to deal only with spatulate hands whose thumbs are large",
+  "quote_sha256_16": "f94206739d45c324",
+  "features": [
+   "W.hand_type=spatulate",
+   "W.thumb.size"
+  ],
+  "triage": "observation_definition_only",
+  "exclusion_reason": null,
+  "school": "d'Arpentigny (ed. Heron-Allen)",
+  "note": "Type definition is spread over ¶335ff.; the trait passages that follow mix in colonial/national claims (e.g. ¶341 Antilles) - those are excluded: protected_trait",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W3-319",
+  "edition": "W3",
+  "locator": "p. 319, Sub-section XVIII 'Useful Hands' (Plate VII)",
+  "quote": "knotty fingers, the outer phalanx square ... a large thumb, with the ball thereof well developed, the palm of medium dimension, hollow and rather firm",
+  "quote_sha256_16": "b9b85fe8165f3c8d",
+  "features": [
+   "W.hand_type=square",
+   "W.finger.joints=knotty",
+   "W.fingertip=square",
+   "W.thumb.size",
+   "W.palm.hollow",
+   "W.palm.firmness"
+  ],
+  "triage": "observation_definition_only",
+  "exclusion_reason": null,
+  "school": "d'Arpentigny (ed. Heron-Allen)",
+  "note": "'rather firm' needs touch (not_image_assessable); 'hollow' scan-only at best",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W3-401",
+  "edition": "W3",
+  "locator": "p. ~401, Sub-section XXIV 'A few Words upon the Hands of Women', ¶644",
+  "quote": "those which are among men and peculiar to the spatulate and square types, are much less imperious and intense among women",
+  "quote_sha256_16": "737c6c4927c65bda",
+  "features": [
+   "W.hand_type"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "protected_trait",
+  "school": "d'Arpentigny (ed. Heron-Allen)",
+  "note": "Also excluded wholesale: Sub-sections X-XV, XIX (national, religious, English, North American, Roman, Chinese hands)",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W4-570",
+  "edition": "W4",
+  "locator": "pp. 247-248, Cheiromancy § 3 'The Line of Head', ¶570",
+  "quote": "This line should be joined to the line of life at its immediate commencement, and leaving it directly should trace a strong ray across the hand to the top of the Mount of the Moon ... such a formation indicates good sense, clear judgment, cleverness, and strength of will.",
+  "quote_sha256_16": "745556beb3c88641",
+  "features": [
+   "W.head_line.origin=joined_to_life",
+   "W.head_line.termination=mount_of_moon"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Heron-Allen",
+  "note": null,
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "W4-569",
+  "edition": "W4",
+  "locator": "p. 247, ¶569",
+  "quote": "A curved line from the line of heart to the Mount of the Moon ... denotes murderous tendencies and instincts.",
+  "quote_sha256_16": "1287ddd3265b4dd2",
+  "features": [
+   "W.minor_line"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "criminality_or_honesty",
+  "school": "Heron-Allen",
+  "note": "Same page also has a maternity-danger reading (health_or_lifespan)",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.36",
+  "edition": "I1",
+  "locator": "p. 104, v. 36",
+  "quote": "If the fingers of the hand be long, the person will live in comfort; if they be without skin folds, he will be popular; if small, he will be intelligent; and if flat, he will serve under others.",
+  "quote_sha256_16": "47e46f8fab5ea456",
+  "features": [
+   "I.finger.length",
+   "I.finger.skin_folds",
+   "I.finger.flatness"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "'long'/'small' need a relative measure; 'serve under others' is a status claim - reword or withhold",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.37",
+  "edition": "I1",
+  "locator": "p. 104, v. 37",
+  "quote": "If the fingers of the hand be large, the person will be poor, and if bent upwards, he will die by weapons. If the hands be like those of the monkey, the person will be rich, and if like those of the tiger, he will be wicked.",
+  "quote_sha256_16": "a1d6d583b1d5ff27",
+  "features": [
+   "I.finger.size",
+   "I.finger.curvature",
+   "I.hand.animal_likeness"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "death_or_accident",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Also moral judgment ('wicked') and an undefined animal simile (not_image_assessable)",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.38",
+  "edition": "I1",
+  "locator": "p. 104, v. 38",
+  "quote": "If the wrists be invisible, firm and close, the person will be a king; if otherwise and if the joints be loose, the hands will suffer sword-cut; and if they should crack, he will be poor.",
+  "quote_sha256_16": "1e8aef1a80049ef8",
+  "features": [
+   "I.wrist"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "not_image_assessable",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Firmness/cracking need touch; injury prediction (death_or_accident)",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.39",
+  "edition": "I1",
+  "locator": "p. 104, v. 39",
+  "quote": "If the palm of the hand be hollow, the person will not inherit his father's property; if it be round and hollow, he will be rich; and if high, he will be generous.",
+  "quote_sha256_16": "bd393d3bec2f788a",
+  "features": [
+   "I.palm.hollow",
+   "I.palm.height"
+  ],
+  "triage": "withheld_pending_review",
+  "exclusion_reason": "not_image_assessable",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Palm concavity is not reliably visible in a 2-D photo; inheritance claim is family-sensitive",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.40",
+  "edition": "I1",
+  "locator": "p. 104, v. 40",
+  "quote": "If the palms of both hands be alike, the person will be poor and wicked; if red, he will be rich; if yellow, he will cohabit with women under prohibition; and if dry, he will be poor.",
+  "quote_sha256_16": "9f4c1768761ff5d5",
+  "features": [
+   "I.palm.colour",
+   "I.hands.symmetry"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "skin_colour",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Also moral and sexual claims",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.41",
+  "edition": "I1",
+  "locator": "p. 104, v. 41",
+  "quote": "If the nail resemble the husk of paddy, the person will be a hermaphrodite; if flat and split, he will be poor; if of bad color, he will be of wrong views; and if red, he will be a king.",
+  "quote_sha256_16": "a692914015a42c57",
+  "features": [
+   "I.nail"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "sexual_identity",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Also skin_colour; nails are on the back of the hand anyway",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.42",
+  "edition": "I1",
+  "locator": "p. 104, v. 42",
+  "quote": "If, in the middle of the thumb, there be lines of the shape of a barley, the person will be rich; if the same be found at the root of the thumb, he will have sons. If the joints of the fingers be long, the person will be popular and will live long.",
+  "quote_sha256_16": "99732c816dbd8eb4",
+  "features": [
+   "I.thumb.yava_mark",
+   "I.finger.joint_length"
+  ],
+  "triage": "partially_excluded",
+  "exclusion_reason": "children_or_marriage_counts",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "'barley mid-thumb' is a minor marking (deferred); 'live long' = health_or_lifespan",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.43",
+  "edition": "I1",
+  "locator": "pp. 104-105, v. 43",
+  "quote": "If the lines in the palm of the hand be glossy and deep, the man will be rich; if otherwise, he will be poor; if the fingers be not close, the person will be poor; and if close, he will earn much money.",
+  "quote_sha256_16": "ee210f88b28c1cf1",
+  "features": [
+   "I.lines.depth",
+   "I.lines.gloss",
+   "I.finger.spacing"
+  ],
+  "triage": "candidate_reframed",
+  "exclusion_reason": null,
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Verse runs pp. 104-105. Gloss is lighting-dependent; finger spacing depends on capture pose (guidance asks fingers apart) - spacing clause withheld",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.44",
+  "edition": "I1",
+  "locator": "p. 105, v. 44",
+  "quote": "If the three lines issuing from the wrist reach the middle of the palm, the person will be a king, and if there be two marks of the shape of the fish in the middle of the palm, the person will daily feed many people.",
+  "quote_sha256_16": "a6b426707fe963cb",
+  "features": [
+   "I.wrist_lines.three_reach_mid_palm",
+   "I.symbol.matsya"
+  ],
+  "triage": "candidate_reframed",
+  "exclusion_reason": null,
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Three-lines clause is the clearest Indian line rule; fish marks = symbol-shapes (deferred)",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.45",
+  "edition": "I1",
+  "locator": "p. 105, v. 45",
+  "quote": "If the lines in the palm be of the shape of vajrayudha, the person will be rich; if they be of the shape of the tail of the fish, he will be learned; if of the shape of a conch shell, an umbrella, a palankin, an elephant, a horse or a lotus, the person will be a king.",
+  "quote_sha256_16": "fdcb965169927b4c",
+  "features": [
+   "I.symbol.*"
+  ],
+  "triage": "deferred",
+  "exclusion_reason": "symbol_shapes_postponed",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Highly subjective shape-matching; high risk of the model 'seeing' symbols",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.46",
+  "edition": "I1",
+  "locator": "p. 105, v. 46",
+  "quote": "If the lines in the palm of the hand be of the shape of a pot, the stem of a lotus, a flag or the hook of the elephant driver, the person will be a guardian of treasure.",
+  "quote_sha256_16": "80643664cb1f23f7",
+  "features": [
+   "I.symbol.*"
+  ],
+  "triage": "deferred",
+  "exclusion_reason": "symbol_shapes_postponed",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Highly subjective shape-matching; high risk of the model 'seeing' symbols",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.47",
+  "edition": "I1",
+  "locator": "p. 105, v. 47",
+  "quote": "If the lines in the palm of the hand be of the shape of the discus, the sword, the axe, the club, the spear or the bow, the person will be a commander of armies",
+  "quote_sha256_16": "960314d1e5dde344",
+  "features": [
+   "I.symbol.*"
+  ],
+  "triage": "deferred",
+  "exclusion_reason": "symbol_shapes_postponed",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Highly subjective shape-matching; high risk of the model 'seeing' symbols",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.48",
+  "edition": "I1",
+  "locator": "p. 105, v. 48",
+  "quote": "If the lines in the palm of the hand be of the shape of a crocodile, a flag, or a cow-shed, the person will be very rich",
+  "quote_sha256_16": "866a9a8c66d52fd9",
+  "features": [
+   "I.symbol.*"
+  ],
+  "triage": "deferred",
+  "exclusion_reason": "symbol_shapes_postponed",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Highly subjective shape-matching; high risk of the model 'seeing' symbols",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.49",
+  "edition": "I1",
+  "locator": "p. 105, v. 49",
+  "quote": "If the lines in the palm of the hand be of the shape of a tank, a temple and the like, or if they be triangular in shape, the person will do acts of charity. The big lines below the thumb indicate sons and the small lines daughters.",
+  "quote_sha256_16": "603dab8e8cb3eef5",
+  "features": [
+   "I.symbol.*",
+   "I.thumb_base.lines"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "children_or_marriage_counts",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": null,
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I1-68.50",
+  "edition": "I1",
+  "locator": "pp. 105-106, v. 50",
+  "quote": "Lines reaching the root of the forefinger indicate the age of the person to be 100 ... If the lines be broken, the person will fall from a tree; if there be either many lines or no lines, the person will be poor.",
+  "quote_sha256_16": "0543c3641b67598d",
+  "features": [
+   "I.lines.to_forefinger_root",
+   "I.lines.continuity",
+   "I.lines.density"
+  ],
+  "triage": "partially_excluded",
+  "exclusion_reason": "health_or_lifespan",
+  "school": "Varahamihira (tr. Chidambaram Iyer)",
+  "note": "Lifespan and fall excluded (also death_or_accident). 'Many or no lines' survives but 'no lines' conflicts with non-detection != absence; require pass-quality image",
+  "locator_check": "matched in scan text; printed-page check by human pending",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "I2-39-41",
+  "edition": "I2",
+  "locator": "vv. 39-41 with commentary, around printed p. 168 (adhikara still to confirm)",
+  "quote": "[OCR, unreliable] manibandhe ... nrpo bhavet || 39 || dvabhyam ca yavamalabhyam rajamantri dhani budhah | ekaya yavapanktya tu ... bahudhanocitah || 40 || ... manibandhe jassa tinni rehau || 41 ||",
+  "quote_sha256_16": "58abb554f3db5fcc",
+  "features": [
+   "I.manibandha.yavamala_count"
+  ],
+  "triage": "candidate_pending_reviewer",
+  "exclusion_reason": null,
+  "school": "Meghavijaya Gani",
+  "note": "Wrist bracelet lines: three = king, two = royal minister/wealthy/learned, one = rich. The commentary cites a Prakrit verse with the same claim and says the left hand is read for women (gendered rule, excluded). Reading the bracelets this way supports the wrist-bracelet interpretation of BS 68.44.",
+  "locator_check": "matched in scan OCR; OCR is noisy, so a Sanskrit reviewer must re-key the verse",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "Z25-v26",
+  "edition": "Z25",
+  "locator": "p. 257, verse 26 and comment",
+  "quote": "In the case of a king, there are three (lines) separating and running round the wrist.",
+  "quote_sha256_16": "b05c6b328b43da6e",
+  "features": [
+   "I.manibandha.count"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Sardulakarnavadana (tr. Zysk)",
+  "note": "Zysk's comment cross-references BS 67.44ab and Garuda Purana 1.65.47 'where a king is the man who has three lines on the wrist'. The verse also has a past-life claim, which is withheld.",
+  "locator_check": "quoted from the published article text",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "Z25-HS3.2.80",
+  "edition": "Z25",
+  "locator": "p. 264, Appendix I (translating Hastasanjivana 3.2.80 (116))",
+  "quote": "The upward-going line moves from the wrist facing the thumb, etc. Its results are fivefold",
+  "quote_sha256_16": "79285b5660d32388",
+  "features": [
+   "I.urdhva_rekha.termination"
+  ],
+  "triage": "candidate",
+  "exclusion_reason": null,
+  "school": "Meghavijaya Gani (tr. Zysk)",
+  "note": "Read by the finger the line reaches: forefinger = king or minister; middle finger = renowned general. Wording must be softened to 'traditionally associated with authority'. A likely partial match for the Western fate line, but the crosswalk needs a source before it can say so.",
+  "locator_check": "quoted from the published article text",
+  "review_status": "unreviewed"
+ },
+ {
+  "passage_id": "Z25-v3",
+  "edition": "Z25",
+  "locator": "p. 244, verse 3 and comment",
+  "quote": "The length of one's life is determined by how far it reaches on this continuum.",
+  "quote_sha256_16": "3156cae4f6fc54d1",
+  "features": [
+   "I.ayu_rekha"
+  ],
+  "triage": "excluded",
+  "exclusion_reason": "health_or_lifespan",
+  "school": "Sardulakarnavadana (tr. Zysk)",
+  "note": "Zysk identifies the Indian 'life line' (ayurekha) as the topmost line nearest the fingers, i.e. the line Western books call the heart line. This is a naming trap for the crosswalk.",
+  "locator_check": "quoted from the published article text",
+  "review_status": "unreviewed"
+ }
+]

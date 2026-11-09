@@ -1,0 +1,54 @@
+{
+ "translation_variants_and_conflicts": [
+  {
+   "feature": "head_line.origin=joined_to_life",
+   "rules": [
+    "R-W-001",
+    "R-W-002",
+    "R-W-003"
+   ],
+   "type": "school disagreement",
+   "summary": "Cheiro reads it as caution and low self-confidence; Benham as reliance on others; Heron-Allen as the favourable norm of good sense and strength of will. The synthesis must show all three."
+  },
+  {
+   "feature": "BS 68.44 'three lines from the wrist'",
+   "rules": [
+    "R-I-002"
+   ],
+   "type": "translation disagreement",
+   "summary": "Iyer 1884 reads three lines rising to mid-palm; Zysk 2016/2025 and Hastasanjivana vv. 39-41 read three wrist bracelets. Keep both readings until the Sanskrit reviewer rules."
+  }
+ ],
+ "crosswalk": [
+  {
+   "a": "W.head_line.origin=joined_to_life",
+   "b": null,
+   "relation": "none",
+   "note": "No Indian counterpart in I1; check I2 later"
+  },
+  {
+   "a": "I.lines.depth",
+   "b": "W.*_line.depth",
+   "relation": "partial",
+   "note": "Both value deep, clear lines, but I1 reads all palm lines together while the Western schools read each line separately; agreement can only be claimed at the 'general line quality' level"
+  },
+  {
+   "a": "I.wrist_lines.three_reach_mid_palm",
+   "b": "W.fate_line",
+   "relation": "unresolved",
+   "note": "Tempting to equate the two; NOT allowed until a source supports it"
+  },
+  {
+   "a": "I.finger.length",
+   "b": "W.finger proportions (Cheiro Part II ch. III)",
+   "relation": "unresolved",
+   "note": "Western passage not yet extracted"
+  },
+  {
+   "a": "I.ayu_rekha (Indian 'life line')",
+   "b": "W.heart_line",
+   "relation": "positional match, NOT an equivalence of meaning",
+   "note": "Same crease, different names and meanings (Zysk 2025 p. 244). The UI must not translate 'ayu rekha' as 'life line'."
+  }
+ ]
+}

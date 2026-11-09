@@ -1,0 +1,235 @@
+[
+ {
+  "rule_id": "R-W-001",
+  "tradition": "Western",
+  "school": "Cheiro",
+  "derived_from": [
+   "W1-016a"
+  ],
+  "predicates": {
+   "head_line.origin": "joined_to_life",
+   "visibility": "observed"
+  },
+  "question_areas": [
+   "temperament",
+   "work_style"
+  ],
+  "draft_text": "In Cheiro's reading, a head line that begins joined to the life line is associated with a sensitive, cautious disposition that may underrate its own abilities.",
+  "wording": "paraphrase",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-W-002",
+  "tradition": "Western",
+  "school": "Benham",
+  "derived_from": [
+   "W2-429a"
+  ],
+  "predicates": {
+   "head_line.origin": "joined_to_life",
+   "visibility": "observed"
+  },
+  "question_areas": [
+   "temperament"
+  ],
+  "draft_text": "Benham reads a longer join between the head and life lines as less self-reliance and more reliance on others' advice.",
+  "wording": "paraphrase",
+  "caveat": "Benham's age-dating of the join (W2-429b) is excluded.",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-W-003",
+  "tradition": "Western",
+  "school": "Heron-Allen",
+  "derived_from": [
+   "W4-570"
+  ],
+  "predicates": {
+   "head_line.origin": "joined_to_life",
+   "head_line.termination": "mount_of_moon",
+   "head_line.clarity": "clear"
+  },
+  "question_areas": [
+   "temperament",
+   "work_style"
+  ],
+  "draft_text": "Heron-Allen treats a clear head line joined to the life line at its start and running toward the Mount of the Moon as the normal, favourable form: good sense, clear judgement and strength of will.",
+  "wording": "paraphrase",
+  "caveat": "Needs the termination point observed; mounts are postponed, so this may be withheld in the MVP.",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-W-004",
+  "tradition": "Western",
+  "school": "Cheiro",
+  "derived_from": [
+   "W1-019a"
+  ],
+  "predicates": {
+   "head_line.origin": "separated_narrow"
+  },
+  "question_areas": [
+   "temperament",
+   "work_style"
+  ],
+  "draft_text": "Cheiro reads a small gap between the head and life lines as independence of thought and quick judgement.",
+  "wording": "paraphrase",
+  "open_issue": "Define 'narrow' as a measurable gap before evaluation.",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-W-005",
+  "tradition": "Western",
+  "school": "Cheiro",
+  "derived_from": [
+   "W1-pviii"
+  ],
+  "predicates": {
+   "thumb.length_relative": "long|short"
+  },
+  "question_areas": [
+   "temperament"
+  ],
+  "draft_text": "Cheiro links a longer thumb with will-power guiding action; he reads a shorter thumb as more impulsive and stubborn.",
+  "wording": "paraphrase (softened)",
+  "open_issue": "Define relative thumb length from image landmarks.",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-W-006",
+  "tradition": "Western",
+  "school": "Cheiro",
+  "derived_from": [
+   "W1-067a"
+  ],
+  "predicates": {},
+  "question_areas": [
+   "relationships"
+  ],
+  "kind": "general",
+  "draft_text": "In Cheiro's system the heart line concerns the affectionate and emotional nature, not physical health.",
+  "wording": "paraphrase",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-W-007",
+  "tradition": "Western",
+  "school": "Cheiro",
+  "derived_from": [
+   "W1-047a"
+  ],
+  "predicates": {
+   "fate_line.visibility": "observed"
+  },
+  "question_areas": [
+   "career"
+  ],
+  "draft_text": "Cheiro associates the fate line with the broad course of one's career. The tradition does not let this reading foretell specific events.",
+  "wording": "paraphrase (reframed)",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-I-001",
+  "tradition": "Indian",
+  "school": "Varahamihira (tr. Iyer)",
+  "derived_from": [
+   "I1-68.43"
+  ],
+  "predicates": {
+   "lines.depth": "deep",
+   "lines.clarity": "clear"
+  },
+  "question_areas": [
+   "prosperity"
+  ],
+  "draft_text": "Bṛhatsaṃhitā 68.43 treats deep, well-formed palm lines as an auspicious sign traditionally linked with prosperity, and shallow lines as the reverse.",
+  "wording": "paraphrase (reframed from 'will be rich/poor')",
+  "caveat": "Gloss is lighting-dependent and not evaluated; the finger-spacing clause is withheld.",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-I-002",
+  "tradition": "Indian",
+  "school": "Varahamihira (tr. Iyer)",
+  "derived_from": [
+   "I1-68.44",
+   "I2-39-41",
+   "Z25-v26"
+  ],
+  "predicates": {
+   "reading_A_Iyer": {
+    "lines_from_wrist.count": 3,
+    "reach": "mid_palm"
+   },
+   "reading_B_Zysk_and_Hastasanjivana": {
+    "manibandha.bracelet_count": 3
+   }
+  },
+  "question_areas": [
+   "status",
+   "prosperity"
+  ],
+  "draft_text": "Bṛhatsaṃhitā 68.44 regards three lines rising from the wrist to the middle of the palm as a royal (highly auspicious) sign.",
+  "wording": "paraphrase (reframed from 'will be a king')",
+  "open_issue": "Translation conflict: Iyer (1884) has three lines rising from the wrist to mid-palm; Zysk and Hastasanjivana vv. 39-41 read three wrist bracelets. The Sanskrit (tisro rekha manibandhanotthitah karatalopagah) needs a ruling from the Sanskrit reviewer. Until then, keep both readings and do not evaluate either.",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-I-003",
+  "tradition": "Indian",
+  "school": "Varahamihira (tr. Iyer)",
+  "derived_from": [
+   "I1-68.36"
+  ],
+  "predicates": {
+   "finger.length_relative": "long"
+  },
+  "question_areas": [
+   "comfort",
+   "sociability"
+  ],
+  "draft_text": "Bṛhatsaṃhitā 68.36 links long fingers with a comfortable life and smooth fingers without skin folds with popularity.",
+  "wording": "paraphrase",
+  "caveat": "'small = intelligent' and 'flat = serve others' are withheld pending review.",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-I-004",
+  "tradition": "Indian",
+  "school": "Meghavijaya Gani",
+  "derived_from": [
+   "I2-39-41"
+  ],
+  "predicates": {
+   "manibandha.bracelet_count": "1|2|3",
+   "manibandha.clarity": "clear"
+  },
+  "question_areas": [
+   "status",
+   "prosperity"
+  ],
+  "draft_text": "Hastasanjivana reads clear bracelet lines at the wrist as auspicious: three traditionally mark royal standing, two a counsellor's standing, one prosperity.",
+  "wording": "paraphrase (reframed)",
+  "caveat": "The wrist must be in frame; the capture guidance currently asks only for the palm. The gendered left-hand rule is excluded.",
+  "review_status": "draft_unreviewed"
+ },
+ {
+  "rule_id": "R-I-005",
+  "tradition": "Indian",
+  "school": "Meghavijaya Gani (tr. Zysk)",
+  "derived_from": [
+   "Z25-HS3.2.80"
+  ],
+  "predicates": {
+   "urdhva_rekha.origin": "wrist",
+   "urdhva_rekha.termination": "forefinger|middle|ring|little"
+  },
+  "question_areas": [
+   "career",
+   "status"
+  ],
+  "draft_text": "Hastasanjivana reads the upward line rising from the wrist by the finger it reaches; reaching the forefinger or middle finger is traditionally associated with authority and leadership.",
+  "wording": "paraphrase (softened from 'king/minister/general')",
+  "review_status": "draft_unreviewed"
+ }
+]

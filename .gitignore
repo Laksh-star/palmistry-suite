@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+.env*
+# never commit real palm images
+*.jpg
+*.jpeg
+*.png
+*.heic
