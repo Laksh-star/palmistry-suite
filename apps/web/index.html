@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Palmistry Suite — Your palm, read in two traditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1714;--bg2:#15201c;--card:#1a2722;--line:#2c3d36;--ink:#f3ecdf;--mute:#a9b3ab;--dim:#76847c;
+--gold:#d9a85b;--gold2:#f0c987;--ind:#e8a24a;--wes:#8fbbe6;--ok:#8fd1a2;--warn:#e9c86c;--r:18px}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(1200px 600px at 50% -10%,#24362e 0,transparent 60%),var(--bg);min-height:100vh}
+.wrap{max-width:980px;margin:0 auto;padding:18px clamp(16px,4vw,36px) 60px}
+header{display:flex;justify-content:space-between;align-items:center;padding:6px 0 18px}
+.logo{display:flex;align-items:center;gap:10px;font:600 24px/1 "Cormorant Garamond",serif;letter-spacing:.3px}
+.logo svg{width:26px;height:26px}
+.hdrlink{all:unset;cursor:pointer;font-size:.82rem;color:var(--mute);border:1px solid var(--line);padding:7px 14px;border-radius:999px}
+h1,h2{font-family:"Cormorant Garamond",serif;font-weight:600;letter-spacing:.2px}
+h1{font-size:clamp(40px,7vw,64px);line-height:1.02;margin:0 0 14px}
+h2{font-size:clamp(30px,4.6vw,42px);line-height:1.08;margin:0 0 8px}
+.eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.lede{color:var(--mute);max-width:58ch;margin:0 0 22px}
+.btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:.95rem;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#231a0b;box-shadow:0 8px 24px -10px rgba(217,168,91,.6)}
+.btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.sm{padding:9px 15px;font-size:.84rem}
+.btn[disabled]{opacity:.35;pointer-events:none}
+.btn:focus-visible,.hdrlink:focus-visible,.opt:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+.screen{display:none}.screen.on{display:block;animation:in .4s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.screen.on{animation:none}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.stack{display:flex;flex-direction:column;gap:10px}
+.muted{color:var(--mute)}.small{font-size:.84rem}.tiny{font-size:.74rem;color:var(--dim);line-height:1.5}
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;padding:20px 0 10px}
+@media(max-width:820px){.hero{grid-template-columns:1fr}}
+.heroArt{background:linear-gradient(160deg,#1d2d27,#0d1512);border:1px solid var(--line);border-radius:28px;padding:22px;position:relative;overflow:hidden;aspect-ratio:1/1.05}
+.heroArt svg{width:100%;height:100%}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 24px}
+.chip{font-size:.8rem;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.ctaBox{display:grid;gap:10px;max-width:420px}
+.scan{stroke:var(--gold2);stroke-width:2;opacity:.9;animation:scan 3.2s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(-120px)}50%{transform:translateY(120px)}}
+@media (prefers-reduced-motion:reduce){.scan{animation:none}}
+/* consent */
+label.chk{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer;align-items:flex-start}
+label.chk:last-child{border:0}
+input[type=checkbox]{accent-color:var(--gold);width:19px;height:19px;margin-top:2px;flex:none}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{all:unset;cursor:pointer;padding:9px 16px;font-size:.86rem;color:var(--mute)}
+.seg button.on{background:var(--ink);color:var(--bg);font-weight:600}
+/* camera */
+.cam{position:relative;border-radius:22px;overflow:hidden;background:#000;aspect-ratio:3/4;max-width:420px;margin:0 auto;border:1px solid var(--line)}
+.cam video,.cam img{width:100%;height:100%;object-fit:cover;display:block}
+.cam .outline{position:absolute;inset:0;pointer-events:none}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px auto;max-width:420px}
+.tips div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;font-size:.78rem;text-align:center}
+.tips b{display:block;color:var(--gold2);font-size:1rem}
+/* marking */
+.markLayout{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:22px;align-items:start}
+@media(max-width:820px){.markLayout{grid-template-columns:1fr}}
+.photo{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#000;touch-action:manipulation;user-select:none}
+.photo img{display:block;width:100%;height:auto}
+.photo svg{position:absolute;inset:0;width:100%;height:100%}
+.photo.tracing{cursor:crosshair;outline:2px solid var(--gold);outline-offset:-2px}
+.progress{height:4px;background:var(--line);border-radius:4px;overflow:hidden;margin:4px 0 16px}
+.progress i{display:block;height:100%;background:var(--gold);transition:width .3s}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opt{all:unset;cursor:pointer;display:flex;gap:12px;align-items:center;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:var(--bg2)}
+.opt:hover{border-color:var(--mute)}.opt.on{border-color:var(--gold);background:rgba(217,168,91,.09)}
+.opt .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--mute);flex:none}
+.opt.on .dot{border-color:var(--gold);background:var(--gold)}
+.diagram{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:8px;width:120px;flex:none}
+/* results */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 18px}
+.tabs button{all:unset;cursor:pointer;padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:.84rem;color:var(--mute)}
+.tabs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
+.resTop{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start}
+@media(max-width:820px){.resTop{grid-template-columns:1fr}}
+.trads{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+@media(max-width:820px){.trads{grid-template-columns:1fr}}
+.trad{border-radius:var(--r);padding:20px;border:1px solid var(--line);background:var(--card)}
+.trad.ind{border-top:3px solid var(--ind)}.trad.wes{border-top:3px solid var(--wes)}
+.trad h3{font:600 28px/1 "Cormorant Garamond",serif;margin:0 0 2px}
+.trad .src{font-size:.78rem;color:var(--dim);margin-bottom:12px}
+.claim{padding:14px 0;border-top:1px solid var(--line)}
+.claim:first-of-type{border-top:0}
+.claim .h{font-weight:600;margin-bottom:3px}
+.claim p{margin:0;color:#e5ddcf}
+.by{font-size:.76rem;color:var(--dim);margin-top:6px}
+details{margin-top:6px}summary{cursor:pointer;font-size:.76rem;color:var(--dim)}
+blockquote{margin:8px 0 4px;padding:4px 0 4px 12px;border-left:2px solid var(--line);font:italic 500 16px/1.45 "Cormorant Garamond",serif;color:#d8cfbf}
+.syn{margin-top:18px}
+.synItem{display:grid;grid-template-columns:130px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.synItem:first-child{border-top:0}
+@media(max-width:820px){.synItem{grid-template-columns:1fr;gap:4px}}
+.tag{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.reflect{font:italic 500 22px/1.4 "Cormorant Garamond",serif;color:#e8dfcf;margin:6px 0 0}
+.chat{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow:auto}
+.msg{max-width:86%;padding:11px 15px;border-radius:16px;font-size:.92rem}
+.msg.u{align-self:flex-end;background:var(--ink);color:var(--bg);border-bottom-right-radius:5px}
+.msg.a{align-self:flex-start;background:var(--bg2);border:1px solid var(--line);border-bottom-left-radius:5px}
+.chatIn{display:flex;gap:8px;margin-top:12px}
+.chatIn input{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:999px;color:var(--ink);padding:12px 16px;font:inherit}
+.sugg{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.sugg button{all:unset;cursor:pointer;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--mute)}
+textarea{width:100%;min-height:110px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:12px;font:13px/1.5 ui-monospace,monospace}
+.err{color:#ef9a8a;font-size:.84rem}
+.unread{font-size:.82rem;color:var(--mute);padding:10px 12px;background:var(--bg2);border-radius:12px;margin-top:10px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line)}
+@media print{header,.noprint,footer .btn{display:none!important}body{background:#fff;color:#000}.trad,.card{background:#fff;border-color:#ccc}.claim p,.reflect,blockquote{color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo"><svg viewBox="0 0 32 32" fill="none" stroke="#d9a85b" stroke-width="1.8" stroke-linecap="round"><path d="M10 28c-2-5-3-9-2-13l-3-5c-1-2 1-3 2-2l3 5V5c0-2 3-2 3 0l1 9V3c0-2 3-2 3 0v11l1-9c0-2 3-2 3 0l-1 10 2-6c1-2 3-1 3 1l-2 9c1 5 0 10-1 15"/><path d="M11 16c3-1 6-1 9 1" opacity=".7"/></svg>Palmistry Suite</div>
+<button class="hdrlink noprint" id="restart">Start again</button></header>
+
+<!-- LANDING -->
+<section class="screen" id="s-home">
+ <div class="hero">
+  <div>
+   <div class="eyebrow">Your palm · two traditions</div>
+   <h1>What do the old palm books see in your hand?</h1>
+   <p class="lede">One photo of your palm, read twice: by the classical Indian texts and by the great Western palmists. You see what each tradition says, where they agree and where they part ways.</p>
+   <div class="chips"><span class="chip">💼 Work &amp; direction</span><span class="chip">🧭 Temperament</span><span class="chip">💗 Affection</span><span class="chip">✨ Prosperity</span><span class="chip">👑 Standing</span></div>
+   <div class="ctaBox">
+    <button class="btn" id="go-scan">Scan my palm</button>
+    <button class="btn sec" id="go-sample">See a sample reading</button>
+    <div class="tiny" style="text-align:center">Free · about 2 minutes · no signup · your photo stays on your device</div>
+   </div>
+  </div>
+  <div class="heroArt" aria-hidden="true">
+   <svg viewBox="0 0 400 420"><defs><radialGradient id="hg" cx="50%" cy="55%" r="60%"><stop offset="0" stop-color="#2f4038"/><stop offset="1" stop-color="#17231e"/></radialGradient><clipPath id="hc"><rect x="0" y="0" width="400" height="420"/></clipPath></defs>
+    <g transform="translate(20,0) scale(.9)"><path d="M110 470 C 95 400, 92 330, 100 280 L 60 210 C 45 185, 70 165, 92 185 L 130 235 L 128 100 C 128 75, 160 75, 162 100 L 170 215 L 182 60 C 184 32, 220 32, 220 60 L 222 212 L 238 75 C 240 50, 274 52, 272 78 L 266 225 L 300 125 C 308 102, 338 112, 330 136 L 318 260 C 330 340, 330 400, 322 470 Z" fill="url(#hg)" stroke="#5f7a6d" stroke-width="2"/>
+    <path d="M118 280 C 150 265, 200 265, 300 298" stroke="#8fbbe6" stroke-width="3" fill="none"/><path d="M118 280 C 105 340, 115 400, 160 450" stroke="#8fbbe6" stroke-width="3" fill="none" opacity=".7"/><path d="M318 230 C 270 212, 210 216, 150 242" stroke="#e8a24a" stroke-width="3" fill="none"/><path d="M228 468 C 226 400, 222 320, 215 225" stroke="#f0c987" stroke-width="2.5" fill="none" stroke-dasharray="4 5"/></g>
+    <g clip-path="url(#hc)"><line class="scan" x1="40" x2="360" y1="210" y2="210"/></g>
+   </svg>
+  </div>
+ </div>
+</section>
+
+<!-- CONSENT -->
+<section class="screen" id="s-consent">
+ <div class="eyebrow">Before we start</div><h2>A quick word</h2>
+ <p class="lede">These are traditional readings, shared for reflection. Please confirm:</p>
+ <div class="card">
+  <label class="chk"><input type="checkbox" class="cs"><span>This is <b>my own hand</b> (or I have permission), and I am 18 or older.</span></label>
+  <label class="chk"><input type="checkbox" class="cs"><span>I understand these are <b>traditional interpretations</b> from historical texts, not predictions or advice.</span></label>
+ </div>
+ <p class="tiny" style="margin-top:12px">Your photo is processed in this browser and is never uploaded. It is cleared when you close the page or tap “Start again”.</p>
+ <div class="row" style="margin-top:18px"><button class="btn sec" data-to="s-home">Back</button><button class="btn" id="consentGo" disabled>Continue</button></div>
+</section>
+
+<!-- CAPTURE -->
+<section class="screen" id="s-capture">
+ <div style="text-align:center"><div class="eyebrow">Guided photo · dominant hand</div><h2>Fit your palm and wrist inside the outline</h2></div>
+ <div class="cam" id="cam">
+  <video id="vid" playsinline muted hidden></video><img id="shot" alt="Your palm photo" hidden>
+  <div id="camIdle" style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--mute);padding:24px">
+   <div><div style="font-size:2.4rem">✋</div><div class="small">The camera opens only after you allow access.</div></div></div>
+  <svg class="outline" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice"><path d="M95 370 C 85 320, 82 260, 88 225 L 58 170 C 47 152, 66 137, 82 152 L 110 190 L 109 80 C 109 60, 135 60, 136 80 L 142 172 L 152 48 C 154 26, 182 26, 183 48 L 185 170 L 198 60 C 200 40, 227 42, 225 62 L 220 180 L 247 100 C 254 82, 278 90, 271 109 L 262 208 C 272 270, 272 320, 266 370" fill="none" stroke="#f0c987" stroke-width="2.4" stroke-dasharray="7 6" opacity=".9"/><path d="M90 350 Q 180 362 270 350" fill="none" stroke="#f0c987" stroke-width="1.6" stroke-dasharray="3 5" opacity=".8"/><text x="150" y="392" fill="#f0c987" font-size="11" text-anchor="middle" font-family="Inter">wrist crease here</text></svg>
+ </div>
+ <div class="tips"><div><b>1</b>Palm, fingers and wrist inside</div><div><b>2</b>Bright, even light, no flash</div><div><b>3</b>Hold still, palm flat to camera</div></div>
+ <div class="stack" style="max-width:420px;margin:0 auto" id="capCtl">
+  <button class="btn" id="openCam">Open camera</button>
+  <label class="btn sec" style="position:relative">Choose an existing photo<input type="file" accept="image/*" id="file" style="position:absolute;inset:0;opacity:0;cursor:pointer"></label>
+ </div>
+ <div class="stack" style="max-width:420px;margin:0 auto" id="liveCtl" hidden><button class="btn" id="snap">Take palm photo</button><button class="btn sec" id="flip">Switch camera</button></div>
+ <div class="row" style="max-width:420px;margin:0 auto;justify-content:center" id="reviewCtl" hidden><button class="btn sec" id="retake">Retake</button><button class="btn" id="useShot">Use this photo</button></div>
+ <p class="err" id="camErr" style="text-align:center"></p>
+ <p class="tiny" style="text-align:center">The live camera view stays on your device.</p>
+</section>
+
+<!-- ABOUT HAND -->
+<section class="screen" id="s-hand">
+ <div class="eyebrow">About this photo</div><h2>Which hand is it?</h2>
+ <div class="card stack">
+  <div class="row"><span style="min-width:150px" class="muted">This photo shows my</span><div class="seg" id="handSeg"><button class="on" data-v="right">Right hand</button><button data-v="left">Left hand</button></div></div>
+  <div class="row"><span style="min-width:150px" class="muted">I write with my</span><div class="seg" id="domSeg"><button class="on" data-v="right">Right</button><button data-v="left">Left</button></div></div>
+  <div class="row"><span style="min-width:150px" class="muted">The wrist crease is</span><div class="seg" id="wristSeg"><button class="on" data-v="1">In the photo</button><button data-v="0">Cut off or covered</button></div></div>
+ </div>
+ <h3 class="eyebrow" style="margin-top:26px">How should we read your lines?</h3>
+ <div class="stack" style="margin-top:10px">
+  <button class="opt" id="m-guided"><span class="dot"></span><span><b>Guided reading</b><br><span class="small muted">Eight short steps. For each, you look at your photo, tap along the line, and choose what you see. About 2 minutes.</span></span></button>
+  <button class="opt" id="m-code"><span class="dot"></span><span><b>I have a reading code</b><br><span class="small muted">If Palmistry Suite's assistant has read your photo, paste the code it gave you.</span></span></button>
+ </div>
+ <div class="row" style="margin-top:20px"><button class="btn sec" data-to="s-capture">Back</button><button class="btn" id="handGo" disabled>Continue</button></div>
+</section>
+
+<!-- CODE -->
+<section class="screen" id="s-code">
+ <div class="eyebrow">Reading code</div><h2>Paste your reading code</h2>
+ <p class="lede">The code lists what was seen on your palm. It contains no image.</p>
+ <textarea id="codeIn" placeholder="PS1:…" aria-label="Reading code"></textarea><p class="err" id="codeErr"></p>
+ <div class="row"><button class="btn sec" data-to="s-hand">Back</button><button class="btn" id="codeGo">Read my palm</button></div>
+</section>
+
+<!-- GUIDED MARKING -->
+<section class="screen" id="s-mark">
+ <div class="row" style="justify-content:space-between"><div class="eyebrow" id="stepLbl">Step 1 of 8</div><button class="hdrlink" id="skipStep">Can't tell — skip</button></div>
+ <div class="progress"><i id="prog"></i></div>
+ <div class="markLayout">
+  <div><div class="photo" id="photo"><img id="markImg" alt="Your palm photo for marking"><svg id="markSvg" viewBox="0 0 1 1" preserveAspectRatio="none"></svg></div>
+   <div class="row" style="margin-top:10px"><button class="btn sm sec" id="traceBtn">✍︎ Tap along the line</button><button class="btn sm sec" id="undoPt">Undo point</button></div>
+   <p class="tiny" id="traceHint">Optional: tap points along the line on your photo to mark it.</p></div>
+  <div><h2 id="qTitle" style="font-size:clamp(26px,3.6vw,34px)"></h2><div class="row" style="align-items:flex-start;gap:14px"><div class="diagram" id="qDiag"></div><p class="muted small" id="qHelp" style="margin:0;flex:1"></p></div>
+   <div class="opts" id="qOpts"></div>
+   <div class="row" style="margin-top:18px"><button class="btn sec" id="prevStep">Back</button><button class="btn" id="nextStep" disabled>Next</button></div></div>
+ </div>
+</section>
+
+<!-- RESULTS -->
+<section class="screen" id="s-result">
+ <div class="resTop">
+  <div class="photo" id="resPhoto"><img id="resImg" alt="Your palm with the marked lines"><svg id="resSvg" viewBox="0 0 1 1" preserveAspectRatio="none"></svg></div>
+  <div><div class="eyebrow">Your palm reading</div><h2 id="resTitle">Read in two traditions</h2>
+   <p class="muted" id="resSub"></p>
+   <div class="tabs noprint" id="tabs"></div>
+   <div class="row noprint"><button class="btn sm sec" onclick="window.print()">Save as PDF</button><button class="btn sm sec" id="toChat">Ask a question</button></div></div>
+ </div>
+ <div class="trads"><div class="trad ind" id="rInd"></div><div class="trad wes" id="rWes"></div></div>
+ <div class="card syn"><div class="eyebrow" style="margin-bottom:6px">Putting them side by side</div><div id="syn"></div></div>
+ <div class="card" style="margin-top:18px" id="chatCard"><div class="eyebrow" style="margin-bottom:10px">Ask about your reading</div><div class="chat" id="chat"></div><div class="sugg" id="sugg"></div>
+  <form class="chatIn" id="qf"><input id="q" placeholder="Ask about work, temperament, affection…" aria-label="Your question" autocomplete="off"><button class="btn sm">Ask</button></form></div>
+</section>
+
+<footer>
+ <p class="tiny"><b>Please note.</b> Palmistry Suite presents traditional interpretations from historical texts, for reflection and entertainment. Palmistry is not scientifically validated; nothing here is a prediction, a diagnosis, or advice about health, relationships, money or any decision. We do not read health, lifespan, marriage, children or the timing of events. Interpretations are paraphrased from public-domain sources (Cheiro 1916; Benham 1900; Heron-Allen 1885; Varāhamihira, <i>Bṛhatsaṃhitā</i>, tr. Iyer 1884; Meghavijaya, <i>Hastasañjīvana</i>) and from K. G. Zysk, “Early Indian Palmistry” (2025, CC BY-SA 4.0). Some Indian interpretations are awaiting scholarly review of the Sanskrit. Your photo is processed only in your browser and is not uploaded or stored. Adults only.</p>
+</footer>
+</div>
+
+<script>
+/* ====== SOURCES & RULES (Stage 1 corpus) ====== */
+const Q={ // passage quotes
+ "W1-016a":["Cheiro, Palmistry for All (1916), p. 16","The position of this line indicates in all cases a highly sensitive disposition, which inclines towards the side of caution and also lacks self-confidence"],
+ "W1-019a":["Cheiro, Palmistry for All (1916), pp. 19–20","When the space is not very wide … it is an excellent mark to have, giving independence of thought, quickness of judgment, and a certain mental daring"],
+ "W2-429a":["Benham, Laws of Scientific Hand Reading (1900), pp. 429–430","The longer the Head line is tied to the Life line the less self-confidence has the subject and the more he relies upon the advice of others."],
+ "W1-pviii":["Cheiro, Palmistry for All (1916), Preface p. viii","The longer the thumb, the more the power of will rules the actions; the shorter the thumb, the more brute force and obstinacy sways the nature."],
+ "W1-067a":["Cheiro, Palmistry for All (1916), p. 67","The Line of Heart relates purely to the affectionate disposition, in fact, to the mental side of the love nature of the subject."],
+ "W1-047a":["Cheiro, Palmistry for All (1916), p. 47","this line undoubtedly appears to indicate at least the main events of one's career"],
+ "I1-68.43":["Bṛhatsaṃhitā 68.43, tr. Iyer (1884), pp. 104–105","If the lines in the palm of the hand be glossy and deep, the man will be rich"],
+ "I1-68.36":["Bṛhatsaṃhitā 68.36, tr. Iyer (1884), p. 104","If the fingers of the hand be long, the person will live in comfort"],
+ "I2-39-41":["Meghavijaya, Hastasañjīvana vv. 39–41 (ed. 1929/30, c. p. 168)","On the wrist bracelets (yavamālā): three mark a king, two a royal minister, one wealth."],
+ "Z25-HS3.2.80":["Hastasañjīvana 3.2.80, tr. Zysk (2025), p. 264","The upward-going line moves from the wrist facing the thumb, etc. Its results are fivefold"]};
+const RULES=[
+ {id:"R-W-001",t:"W",sch:"Cheiro",src:["W1-016a"],req:{origin:["joined"]},area:["temperament","work"],h:"A head line that starts joined to the life line",txt:"Cheiro reads this as a sensitive, careful temperament: someone who thinks before acting and may underrate their own abilities."},
+ {id:"R-W-002",t:"W",sch:"Benham",src:["W2-429a"],req:{origin:["joined"]},area:["temperament"],h:"The same join, as Benham sees it",txt:"Benham reads the join as a habit of weighing other people's advice before relying on one's own judgement."},
+ {id:"R-W-004",t:"W",sch:"Cheiro",src:["W1-019a"],req:{origin:["gap"]},area:["temperament","work"],h:"A small gap between head and life lines",txt:"Cheiro calls this an excellent mark: independence of thought, quick judgement and a certain mental daring."},
+ {id:"R-W-005a",t:"W",sch:"Cheiro",src:["W1-pviii"],req:{thumb:["long"]},area:["temperament"],h:"A long thumb",txt:"For Cheiro the thumb is the most expressive part of the hand; a long one means will-power guides your actions."},
+ {id:"R-W-005b",t:"W",sch:"Cheiro",src:["W1-pviii"],req:{thumb:["short"]},area:["temperament"],h:"A shorter thumb",txt:"Cheiro reads a shorter thumb as acting from drive and persistence more than deliberate will."},
+ {id:"R-W-006",t:"W",sch:"Cheiro",src:["W1-067a"],req:{heart:["clear","faint"]},area:["relationships"],h:"The heart line",txt:"In Cheiro's system the heart line speaks of the affectionate and emotional nature, the mental side of love, rather than the body."},
+ {id:"R-W-007",t:"W",sch:"Cheiro",src:["W1-047a"],req:{vertical:["yes"]},area:["work"],h:"A line rising up the centre of the palm",txt:"Cheiro calls this the line of destiny and links it to the broad course of one's career."},
+ {id:"R-I-001",t:"I",sch:"Bṛhatsaṃhitā",src:["I1-68.43"],req:{depth:["deep"]},area:["prosperity"],h:"Deep, well-formed lines",txt:"Varāhamihira counts deep, well-formed palm lines among the auspicious signs traditionally linked with prosperity."},
+ {id:"R-I-003",t:"I",sch:"Bṛhatsaṃhitā",src:["I1-68.36"],req:{fingers:["long"]},area:["prosperity","relationships"],h:"Long fingers",txt:"The Bṛhatsaṃhitā links long fingers with a life of comfort."},
+ {id:"R-I-004",t:"I",sch:"Hastasañjīvana",src:["I2-39-41"],req:{bracelets:[1,2,3]},wrist:true,area:["prosperity","status"],h:b=>`${["","One","Two","Three"][b]} clear bracelet line${b>1?"s":""} at the wrist`,txt:b=>({3:"Meghavijaya treats three clear bracelets (yavamālā) as the most auspicious count, traditionally a mark of high standing.",2:"Meghavijaya reads two clear bracelets as the mark of a trusted counsellor: standing earned through judgement.",1:"Meghavijaya reads a single clear bracelet as a sign traditionally associated with prosperity."})[b]},
+ {id:"R-I-005",t:"I",sch:"Hastasañjīvana",src:["Z25-HS3.2.80"],req:{reaches:["forefinger","middle"]},area:["work","status"],h:r=>`The upward line reaching the ${r} finger`,txt:r=>r==="middle"?"Meghavijaya reads the upward line (ūrdhvarekhā) by where it ends; reaching the middle finger is traditionally associated with leadership and renown.":"Meghavijaya reads the upward line (ūrdhvarekhā) by where it ends; reaching the forefinger is traditionally associated with authority and counsel."}];
+/* ====== GUIDED STEPS ====== */
+const D=(paths)=>`<svg viewBox="0 0 100 120"><path d="M28 118 C 24 100,22 82,25 70 L 14 52 C 10 46,17 41,22 46 L 31 58 L 31 22 C 31 16,40 16,40 22 L 42 52 L 45 12 C 46 5,55 5,55 12 L 56 50 L 60 18 C 61 11,70 12,69 19 L 66 54 L 75 32 C 77 26,85 29,83 35 L 79 68 C 82 86,82 102,80 118" fill="#1d2a25" stroke="#5f7a6d" stroke-width="1.4"/>${paths}</svg>`;
+const L={life:'<path d="M30 72 C 27 88,30 102,42 112" stroke="#8fbbe6" stroke-width="2.4" fill="none"/>',head:'<path d="M30 72 C 42 68,58 68,76 76" stroke="#8fbbe6" stroke-width="2.4" fill="none"/>',heart:'<path d="M79 62 C 66 57,50 58,36 64" stroke="#e8a24a" stroke-width="2.4" fill="none"/>',vert:'<path d="M54 116 C 54 98,53 78,51 56" stroke="#f0c987" stroke-width="2.4" fill="none"/>',wrist:'<path d="M30 110 Q 54 114 78 110 M31 115 Q 54 119 78 115" stroke="#f0c987" stroke-width="1.6" fill="none"/>'};
+const STEPS=[
+ {k:"life",n:"life line",title:"Find your life line",help:"The crease that curves around the base of your thumb. Western palmists call it the life line.",d:D(L.life),opts:[["clear","I can see it clearly"],["faint","It's there but faint"]],col:"#8fbbe6"},
+ {k:"origin",n:"where the head line begins",title:"Where does your head line begin?",help:"The head line runs across the middle of your palm. Look at its start, between thumb and forefinger: does it touch the life line?",d:D(L.life+L.head),opts:[["joined","It starts joined to the life line"],["gap","A small gap between them"],["wide","A wide gap"]],col:"#7aa9d8"},
+ {k:"heart",n:"heart line",title:"Your heart line",help:"The crease nearest your fingers, running across under them. (The Indian texts call this crease āyurekhā.)",d:D(L.heart),opts:[["clear","Deep and clear"],["faint","Faint or broken"]],col:"#e8a24a"},
+ {k:"vertical",n:"the rising centre line",title:"Is there a line rising up the centre?",help:"Look for a line rising from near the wrist toward the middle finger. Many hands have only part of one.",d:D(L.vert),opts:[["yes","Yes, I can see one"],["no","No line there"]],col:"#f0c987"},
+ {k:"reaches",n:"where the rising line ends",title:"Where does that line end?",help:"Follow the rising line upward. Which finger is it heading for?",d:D(L.vert),opts:[["forefinger","Forefinger"],["middle","Middle finger"],["ring","Ring finger"],["none","It stops in the palm"]],col:"#f0c987",when:a=>a.vertical==="yes"},
+ {k:"bracelets",n:"wrist bracelets",title:"Count the lines at your wrist",help:"Just below the palm, across the wrist, there are usually one to three crease lines like bracelets. Count the clear ones.",d:D(L.wrist),opts:[[1,"One"],[2,"Two"],[3,"Three"],[0,"None clear"]],col:"#e3b33b",when:(a,m)=>m.wrist},
+ {k:"depth",n:"line depth",title:"How deep are your lines overall?",help:"Look at the main creases together. Are they deeply cut and well-defined, or light and shallow?",d:D(L.life+L.head+L.heart),opts:[["deep","Deep and well-defined"],["shallow","Light and shallow"]],col:null},
+ {k:"fingers",n:"finger length",title:"Your fingers",help:"Compare your middle finger with the length of your palm, from its base to the wrist crease.",d:D(""),opts:[["long","Middle finger is about as long as the palm"],["average","A little shorter than the palm"],["short","Clearly shorter than the palm"]],col:null},
+ {k:"thumb",n:"thumb length",title:"Your thumb",help:"Hold your thumb against the side of your hand. Where does its tip reach on your forefinger?",d:D(""),opts:[["long","Past the middle of the first joint"],["average","Around the first joint"],["short","Below the first joint"]],col:null}];
+/* ====== STATE ====== */
+const S={photo:null,hand:"right",dom:"right",wrist:true,mode:null,ans:{},pts:{},step:0,focus:"overall",sample:false};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function show(id){$$(".screen").forEach(x=>x.classList.toggle("on",x.id===id));window.scrollTo({top:0,behavior:"smooth"});if(id!=="s-capture")stopCam();}
+$$("[data-to]").forEach(b=>b.onclick=()=>show(b.dataset.to));
+$("#restart").onclick=()=>location.reload();
+$("#go-scan").onclick=()=>show("s-consent");
+$("#go-sample").onclick=sample;
+$$(".cs").forEach(c=>c.onchange=()=>$("#consentGo").disabled=!$$(".cs").every(x=>x.checked));
+$("#consentGo").onclick=()=>show("s-capture");
+function seg(id,cb){$$(`#${id} button`).forEach(b=>b.onclick=()=>{$$(`#${id} button`).forEach(x=>x.classList.remove("on"));b.classList.add("on");cb(b.dataset.v);});}
+seg("handSeg",v=>S.hand=v);seg("domSeg",v=>S.dom=v);seg("wristSeg",v=>S.wrist=v==="1");
+/* ====== CAMERA ====== */
+let stream=null,facing="environment";
+async function startCam(){ $("#camErr").textContent="";
+ try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:facing},audio:false}); const v=$("#vid"); v.srcObject=stream; v.hidden=false; await v.play(); $("#camIdle").hidden=true; $("#capCtl").hidden=true; $("#liveCtl").hidden=false; }
+ catch(e){ $("#camErr").textContent="The camera isn't available here. Choose an existing photo instead."; } }
+function stopCam(){ if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;} }
+$("#openCam").onclick=startCam;
+$("#flip").onclick=()=>{facing=facing==="environment"?"user":"environment";stopCam();startCam();};
+$("#snap").onclick=()=>{const v=$("#vid"),c=document.createElement("canvas");c.width=v.videoWidth;c.height=v.videoHeight;c.getContext("2d").drawImage(v,0,0);setShot(c.toDataURL("image/jpeg",.9));stopCam();v.hidden=true;$("#liveCtl").hidden=true;};
+$("#file").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{ // re-encode via canvas: strips EXIF/location
+  const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),k=Math.min(1,1600/Math.max(im.width,im.height));c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);setShot(c.toDataURL("image/jpeg",.9));};im.src=r.result;};r.readAsDataURL(f);};
+function setShot(u){S.photo=u;const im=$("#shot");im.src=u;im.hidden=false;$("#camIdle").hidden=true;$("#capCtl").hidden=true;$("#reviewCtl").hidden=false;}
+$("#retake").onclick=()=>{S.photo=null;$("#shot").hidden=true;$("#camIdle").hidden=false;$("#reviewCtl").hidden=true;$("#capCtl").hidden=false;$("#file").value="";};
+$("#useShot").onclick=()=>show("s-hand");
+/* ====== MODE ====== */
+["m-guided","m-code"].forEach(id=>$("#"+id).onclick=()=>{S.mode=id;$$("#s-hand .opt").forEach(o=>o.classList.toggle("on",o.id===id));$("#handGo").disabled=false;});
+$("#handGo").onclick=()=>{ if(S.mode==="m-code") show("s-code"); else { S.step=0; S.ans={}; S.pts={}; renderStep(); show("s-mark"); } };
+/* ====== READING CODE (from the assistant) ====== */
+$("#codeGo").onclick=()=>{ $("#codeErr").textContent=""; try{
+  let t=$("#codeIn").value.trim(); if(t.startsWith("PS1:")) t=decodeURIComponent(escape(atob(t.slice(4).replace(/\s/g,""))));
+  const d=JSON.parse(t); if(!d.ans) throw 0; S.ans=d.ans; S.pts=d.pts||{}; if(typeof d.wrist==="boolean") S.wrist=d.wrist; renderResults();
+ }catch(e){ $("#codeErr").textContent="That code wasn't recognised. Please paste the whole code, starting with PS1:"; } };
+/* ====== GUIDED MARKING ====== */
+let tracing=false;
+const activeSteps=()=>STEPS.filter(s=>!s.when||s.when(S.ans,S));
+function renderStep(){ const st=activeSteps(), s=st[S.step]; $("#stepLbl").textContent=`Step ${S.step+1} of ${st.length}`; $("#prog").style.width=`${(S.step)/st.length*100}%`;
+ $("#markImg").src=S.photo; $("#qTitle").textContent=s.title; $("#qHelp").textContent=s.help; $("#qDiag").innerHTML=s.d;
+ $("#qOpts").innerHTML=s.opts.map(([v,l])=>`<button class="opt ${S.ans[s.k]===v?'on':''}" data-v="${v}"><span class="dot"></span><span>${l}</span></button>`).join("");
+ $$("#qOpts .opt").forEach(o=>o.onclick=()=>{const raw=o.dataset.v;S.ans[s.k]=isNaN(raw)?raw:+raw;renderStep();});
+ $("#nextStep").disabled=!(s.k in S.ans); $("#nextStep").textContent=S.step===st.length-1?"See my reading":"Next";
+ const canTrace=!!s.col; $("#traceBtn").hidden=$("#undoPt").hidden=!canTrace; $("#traceHint").hidden=!canTrace; tracing=false; $("#photo").classList.remove("tracing"); $("#traceBtn").textContent="✍︎ Tap along the line";
+ drawOverlay($("#markSvg"),s.k); }
+function advance(){ const st=activeSteps(); if(S.step<st.length-1){S.step++;renderStep();} else renderResults(); }
+$("#nextStep").onclick=advance;
+$("#prevStep").onclick=()=>{ if(S.step>0){S.step--;renderStep();} else show("s-hand"); };
+$("#skipStep").onclick=()=>{ const s=activeSteps()[S.step]; S.ans[s.k]="unsure"; advance(); };
+$("#traceBtn").onclick=()=>{tracing=!tracing;$("#photo").classList.toggle("tracing",tracing);$("#traceBtn").textContent=tracing?"✓ Done tracing":"✍︎ Tap along the line";};
+$("#undoPt").onclick=()=>{const k=activeSteps()[S.step].k;(S.pts[k]||[]).pop();drawOverlay($("#markSvg"),k);};
+$("#photo").addEventListener("click",e=>{ if(!tracing) return; const r=$("#markImg").getBoundingClientRect(); const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height; if(x<0||x>1||y<0||y>1)return; const k=activeSteps()[S.step].k; (S.pts[k]=S.pts[k]||[]).push([+x.toFixed(4),+y.toFixed(4)]); drawOverlay($("#markSvg"),k); });
+function colOf(k){const s=STEPS.find(x=>x.k===k);return s&&s.col;}
+function drawOverlay(svg,activeK){ let h=""; for(const [k,p] of Object.entries(S.pts)){ if(!p.length||!colOf(k))continue; const d="M"+p.map(q=>q.join(" ")).join(" L"); const on=!activeK||k===activeK;
+  h+=`<path d="${d}" fill="none" stroke="${colOf(k)}" stroke-width="${on?.012:.007}" stroke-linecap="round" stroke-linejoin="round" opacity="${on?1:.45}" vector-effect="none"/>`; if(k===activeK) h+=p.map(q=>`<circle cx="${q[0]}" cy="${q[1]}" r=".012" fill="${colOf(k)}"/>`).join(""); } svg.innerHTML=h; }
+/* ====== RULE ENGINE (deterministic) ====== */
+function evaluate(){ const a=S.ans; return RULES.map(r=>{ if(r.wrist&&!S.wrist) return {r,ok:false,why:"wrist"};
+  for(const [k,vals] of Object.entries(r.req)){ const v=a[k]; if(v===undefined||v==="unsure") return {r,ok:false,why:"unsure",k}; if(!vals.includes(v)) return {r,ok:false,why:"na"}; }
+  return {r,ok:true}; }); }
+const val=(r,k)=>S.ans[k];
+function claimText(r){ const arg=r.id==="R-I-004"?S.ans.bracelets:r.id==="R-I-005"?S.ans.reaches:null; return {h:typeof r.h==="function"?r.h(arg):r.h, t:typeof r.txt==="function"?r.txt(arg):r.txt}; }
+const FOCI=[["overall","Overall"],["work","Work & direction"],["temperament","Temperament"],["relationships","Affection"],["prosperity","Prosperity"],["status","Standing"]];
+function renderResults(){ show("s-result"); $("#resImg").src=S.photo||sampleImg(); drawOverlay($("#resSvg"),null);
+ $("#resSub").textContent=`${S.sample?"Sample reading · ":""}${S.hand==="right"?"Right":"Left"} hand · ${S.hand===S.dom?"your dominant hand":"your non-dominant hand"}`;
+ $("#tabs").innerHTML=FOCI.map(([k,l])=>`<button class="${k===S.focus?'on':''}" data-f="${k}">${l}</button>`).join("");
+ $$("#tabs button").forEach(b=>b.onclick=()=>{S.focus=b.dataset.f;renderResults();});
+ const ev=evaluate(); const inF=r=>S.focus==="overall"||r.area.includes(S.focus);
+ const box=(t,name,src)=>{ const ok=ev.filter(e=>e.ok&&e.r.t===t&&inF(e.r));
+  let h=`<h3>${name}</h3><div class="src">${src}</div>`;
+  h+= ok.length? ok.map(({r})=>{const c=claimText(r);return `<div class="claim"><div class="h">${c.h}</div><p>${c.t}</p><div class="by">${r.sch}</div><details><summary>Read the source</summary>${r.src.map(p=>`<blockquote>“${Q[p][1]}”</blockquote><div class="tiny">${Q[p][0]}</div>`).join("")}</details></div>`;}).join("")
+   : `<p class="muted">${S.focus==="overall"?"This tradition's texts don't comment on the features we could read.":"This tradition's texts don't speak to this theme for your hand."} We never borrow from the other tradition to fill the gap.</p>`;
+  return h; };
+ $("#rInd").innerHTML=box("I","Indian","Bṛhatsaṃhitā · Hastasañjīvana"); $("#rWes").innerHTML=box("W","Western","Cheiro · Benham");
+ renderSyn(ev); initChat(); }
+function renderSyn(ev){ const ok=id=>ev.find(e=>e.r.id===id)?.ok; const it=[];
+ if(ok("R-W-001")&&ok("R-W-002")) it.push(["Two Western views","Cheiro and Benham both comment on the joined start of your head line, and they see it differently: Cheiro sees care and caution, Benham a habit of seeking advice. We show both rather than choosing."]);
+ if(ok("R-W-004")) it.push(["Western","Your head and life lines start apart, which Cheiro counts among the better marks for independent thinking."]);
+ if(ok("R-W-007")&&ok("R-I-005")) it.push(["A shared line","Both traditions pay attention to the line rising up your palm and connect it with the course of your work. They name it differently (the line of destiny; the ūrdhvarekhā) and read it in their own ways."]);
+ else if(ok("R-W-007")) it.push(["Western","Cheiro reads your rising line in terms of career; the Indian reading depends on where it ends, which points elsewhere for your hand."]);
+ if(ok("R-I-004")) it.push(["Indian","The bracelets at your wrist are read only in the Indian texts; the Western books here are silent on them."]);
+ if(ok("R-I-001")||ok("R-I-003")) it.push(["Indian","The quality of your lines and the length of your fingers are read as auspicious signs in the Bṛhatsaṃhitā; the Western sources read the same features differently, or not at all."]);
+ const un=STEPS.filter(s=>S.ans[s.k]==="unsure").map(s=>s.n);
+ if(!S.wrist) un.push("the wrist bracelets (wrist not in photo)");
+ $("#syn").innerHTML=it.map(([k,t])=>`<div class="synItem"><div class="tag">${k}</div><div>${t}</div></div>`).join("")+
+  `<div class="synItem"><div class="tag">In sum</div><div><p class="reflect">${reflection(ev)}</p></div></div>`+
+  (un.length?`<div class="unread">Not read this time: ${un.join("; ")}. A clearer photo can fill these in.</div>`:"");
+}
+function reflection(ev){ const ok=id=>ev.find(e=>e.r.id===id)?.ok;
+ if(ok("R-W-001")) return "Both traditions describe a hand that weighs things carefully. Where they differ is in how much that care comes from within, and how much from listening to others. That part is yours to answer.";
+ if(ok("R-W-004")) return "The old books see in this hand an independent mind. Where they differ, they leave the meaning open for you to decide.";
+ return "Each tradition finds something to say about this hand, and where they differ, they leave the question with you."; }
+/* ====== Q&A (grounded in this reading) ====== */
+const BLOCK=[[/health|ill|disease|sick|die|death|lifespan|how long|accident|cancer/i,"I don't read health, lifespan or accidents. We leave those out by design."],
+ [/marri|wife|husband|spouse|children|kids|son|daughter|baby|pregnan/i,"I don't predict marriage or children. I can tell you what the traditions say about your affectionate nature: try “What does my heart line say?”"],
+ [/when|what year|what age|which year|date|timing|how soon/i,"I don't put dates on anything. The old books claimed to, but we don't carry those readings."],
+ [/honest|trust|criminal|lie|cheat|caste|religion/i,"The old texts made judgements like that; we don't repeat them."],
+ [/ignore|instruction|system prompt|pretend/i,"I can only answer from your reading."]];
+const ROUTE=[[/work|career|job|business|profession|direction/i,["R-W-007","R-I-005","R-W-001","R-W-004"]],[/money|wealth|rich|prosper|fortune/i,["R-I-001","R-I-004","R-I-003"]],
+ [/temper|personal|character|think|decid|confiden|cautio|independ|nature/i,["R-W-001","R-W-002","R-W-004","R-W-005a","R-W-005b"]],[/love|affection|relation|emotion|heart/i,["R-W-006","R-I-003"]],
+ [/status|authority|lead|power|standing|respect/i,["R-I-005","R-I-004"]],[/wrist|bracelet/i,["R-I-004"]],[/thumb|will/i,["R-W-005a","R-W-005b"]]];
+function answer(q){ for(const [re,m] of BLOCK) if(re.test(q)) return m; const ev=evaluate();
+ for(const [re,ids] of ROUTE) if(re.test(q)){ const ok=ev.filter(e=>e.ok&&ids.includes(e.r.id)); if(!ok.length) return "Your reading doesn't include anything on that, usually because that feature wasn't clear in the photo. You could retake the photo or mark that step again.";
+  return ok.map(({r})=>{const c=claimText(r);return `<b>${r.t==="I"?"Indian":"Western"} · ${r.sch}:</b> ${c.t}`;}).join("<br><br>"); }
+ return "I can answer about your work, temperament, affection, prosperity or standing, from what was read in your palm."; }
+let chatOn=false;
+function say(c,h){const d=document.createElement("div");d.className="msg "+c;d.innerHTML=h;$("#chat").appendChild(d);$("#chat").scrollTop=1e6;}
+function initChat(){ if(chatOn)return; chatOn=true; say("a","Ask me anything about your reading. I'll answer only from what was found in your palm.");
+ $("#sugg").innerHTML=["What do my hands say about my work?","Am I cautious or independent?","What do my wrist lines mean?","What does my heart line say?"].map(s=>`<button>${s}</button>`).join("");
+ $$("#sugg button").forEach(b=>b.onclick=()=>ask(b.textContent)); }
+function ask(q){say("u",q.replace(/</g,"&lt;"));setTimeout(()=>say("a",answer(q)),220);}
+$("#qf").onsubmit=e=>{e.preventDefault();const q=$("#q").value.trim();if(q){ask(q);$("#q").value="";}};
+$("#toChat").onclick=()=>$("#chatCard").scrollIntoView({behavior:"smooth"});
+/* ====== SAMPLE ====== */
+function sampleImg(){ return "data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><rect width="300" height="400" fill="#121b17"/><path d="M95 400 C 85 330, 82 270, 88 235 L 58 180 C 47 162, 66 147, 82 162 L 110 200 L 109 90 C 109 70, 135 70, 136 90 L 142 182 L 152 58 C 154 36, 182 36, 183 58 L 185 180 L 198 70 C 200 50, 227 52, 225 72 L 220 190 L 247 110 C 254 92, 278 100, 271 119 L 262 218 C 272 280, 272 340, 266 400 Z" fill="#c9a88a"/><text x="150" y="24" fill="#76847c" font-family="Arial" font-size="10" text-anchor="middle">SAMPLE HAND</text></svg>`); }
+function sample(){ S.sample=true; S.photo=sampleImg(); S.wrist=true; S.ans={life:"clear",origin:"joined",heart:"clear",vertical:"yes",reaches:"middle",bracelets:3,depth:"deep",fingers:"long",thumb:"unsure"};
+ S.pts={life:[[.33,.6],[.3,.7],[.33,.8],[.4,.9]],origin:[[.33,.6],[.5,.57],[.75,.63]],heart:[[.85,.53],[.65,.5],[.45,.52]],vertical:[[.56,.95],[.56,.78],[.55,.6],[.54,.47]],bracelets:[[.32,.97],[.6,.98],[.86,.97]]};
+ renderResults(); }
+show("s-home");
+</script>
+</body>
+</html>

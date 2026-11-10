@@ -15,6 +15,8 @@ Run the tests with `npm test` (Node 20+, no dependencies).
 ## Layout
 | Path | Contents |
 |---|---|
+| `apps/web/index.html` | **The app**: guided camera with a palm-and-wrist outline, guided line marking on your own photo, or a reading code from the assistant; Indian and Western readings by theme, synthesis, Q&A, save as PDF. Runs entirely in the browser |
+| `docs/reading-code.md` | The assistant → app reading-code format |
 | `prototype/index.html` | The clickable prototype: consent → focus → capture (palm + wrist) → image check → observations → readings → synthesis → Q&A → evidence |
 | `content/sources/editions.json` | Editions in the approved corpus (W1–W4, I1, I2 Sanskrit layers, Z25) |
 | `content/sources/passages.json` | Sample passages with locators, checksums, triage and exclusion reasons |
