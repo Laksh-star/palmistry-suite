@@ -117,6 +117,7 @@ textarea{width:100%;min-height:110px;background:var(--bg2);border:1px solid var(
 .fam img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#000;filter:grayscale(1) contrast(1.05)}
 .fam div{padding:10px 12px}.fam b{display:block;font:600 18px/1.15 "Cormorant Garamond",serif}.fam span{font-size:.74rem;color:var(--dim)}
 .credit{font-size:.78rem;color:var(--dim);margin-top:8px}
+.glance{font:500 clamp(21px,2.6vw,26px)/1.4 "Cormorant Garamond",serif;color:#efe6d6;margin:4px 0 16px}
 footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line)}
 @media print{header,.noprint,footer .btn{display:none!important}body{background:#fff;color:#000}.trad,.card{background:#fff;border-color:#ccc}.claim p,.reflect,blockquote{color:#000}}
 </style>
@@ -233,11 +234,12 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line)}
   <div class="photo" id="resPhoto"><img id="resImg" alt="Your palm with the marked lines"><svg id="resSvg" viewBox="0 0 1 1" preserveAspectRatio="none"></svg></div>
   <div><div class="eyebrow" id="resEyebrow">Your palm reading</div><h2 id="resTitle">Read in two traditions</h2>
    <p class="muted" id="resSub"></p>
+   <p class="glance" id="glance"></p>
    <div class="tabs noprint" id="tabs"></div>
    <div class="row noprint"><button class="btn sm sec" onclick="window.print()">Save as PDF</button><button class="btn sm sec" id="toChat">Ask a question</button></div></div>
  </div>
  <div class="trads"><div class="trad ind" id="rInd"></div><div class="trad wes" id="rWes"></div></div>
- <div class="card syn"><div class="eyebrow" style="margin-bottom:6px">Putting them side by side</div><div id="syn"></div></div>
+ <div class="card syn" id="synCard"><div class="eyebrow" style="margin-bottom:6px">How the two traditions compare</div><div id="syn"></div></div>
  <div class="card" style="margin-top:18px" id="chatCard"><div class="eyebrow" style="margin-bottom:10px">Ask about your reading</div><div class="chat" id="chat"></div><div class="sugg" id="sugg"></div>
   <form class="chatIn" id="qf"><input id="q" placeholder="Ask about work, temperament, affection…" aria-label="Your question" autocomplete="off"><button class="btn sm">Ask</button></form></div>
 </section>
@@ -261,17 +263,38 @@ const Q={ // passage quotes
  "I2-39-41":["Meghavijaya, Hastasañjīvana vv. 39–41 (ed. 1929/30, c. p. 168)","On the wrist bracelets (yavamālā): three mark a king, two a royal minister, one wealth."],
  "Z25-HS3.2.80":["Hastasañjīvana 3.2.80, tr. Zysk (2025), p. 264","The upward-going line moves from the wrist facing the thumb, etc. Its results are fivefold"]};
 const RULES=[
- {id:"R-W-001",t:"W",sch:"Cheiro",src:["W1-016a"],req:{origin:["joined"]},area:["temperament","work"],h:"A head line that starts joined to the life line",txt:"Cheiro reads this as a sensitive, careful temperament: someone who thinks before acting and may underrate their own abilities."},
- {id:"R-W-002",t:"W",sch:"Benham",src:["W2-429a"],req:{origin:["joined"]},area:["temperament"],h:"The same join, as Benham sees it",txt:"Benham reads the join as a habit of weighing other people's advice before relying on one's own judgement."},
- {id:"R-W-004",t:"W",sch:"Cheiro",src:["W1-019a"],req:{origin:["gap"]},area:["temperament","work"],h:"A small gap between head and life lines",txt:"Cheiro calls this an excellent mark: independence of thought, quick judgement and a certain mental daring."},
- {id:"R-W-005a",t:"W",sch:"Cheiro",src:["W1-pviii"],req:{thumb:["long"]},area:["temperament"],h:"A long thumb",txt:"For Cheiro the thumb is the most expressive part of the hand; a long one means will-power guides your actions."},
- {id:"R-W-005b",t:"W",sch:"Cheiro",src:["W1-pviii"],req:{thumb:["short"]},area:["temperament"],h:"A shorter thumb",txt:"Cheiro reads a shorter thumb as acting from drive and persistence more than deliberate will."},
- {id:"R-W-006",t:"W",sch:"Cheiro",src:["W1-067a"],req:{heart:["clear","faint"]},area:["relationships"],h:"The heart line",txt:"In Cheiro's system the heart line speaks of the affectionate and emotional nature, the mental side of love, rather than the body."},
- {id:"R-W-007",t:"W",sch:"Cheiro",src:["W1-047a"],req:{vertical:["yes"]},area:["work"],h:"A line rising up the centre of the palm",txt:"Cheiro calls this the line of destiny and links it to the broad course of one's career."},
- {id:"R-I-001",t:"I",sch:"Bṛhatsaṃhitā",src:["I1-68.43"],req:{depth:["deep"]},area:["prosperity"],h:"Deep, well-formed lines",txt:"Varāhamihira counts deep, well-formed palm lines among the auspicious signs traditionally linked with prosperity."},
- {id:"R-I-003",t:"I",sch:"Bṛhatsaṃhitā",src:["I1-68.36"],req:{fingers:["long"]},area:["prosperity","relationships"],h:"Long fingers",txt:"The Bṛhatsaṃhitā links long fingers with a life of comfort."},
- {id:"R-I-004",t:"I",sch:"Hastasañjīvana",src:["I2-39-41"],req:{bracelets:[1,2,3]},wrist:true,area:["prosperity","status"],h:b=>`${["","One","Two","Three"][b]} clear bracelet line${b>1?"s":""} at the wrist`,txt:b=>({3:"Meghavijaya treats three clear bracelets (yavamālā) as the most auspicious count, traditionally a mark of high standing.",2:"Meghavijaya reads two clear bracelets as the mark of a trusted counsellor: standing earned through judgement.",1:"Meghavijaya reads a single clear bracelet as a sign traditionally associated with prosperity."})[b]},
- {id:"R-I-005",t:"I",sch:"Hastasañjīvana",src:["Z25-HS3.2.80"],req:{reaches:["forefinger","middle"]},area:["work","status"],h:r=>`The upward line reaching the ${r==="forefinger"?"forefinger":r+" finger"}`,txt:r=>r==="middle"?"Meghavijaya reads the upward line (ūrdhvarekhā) by where it ends; reaching the middle finger is traditionally associated with leadership and renown.":"Meghavijaya reads the upward line (ūrdhvarekhā) by where it ends; reaching the forefinger is traditionally associated with authority and counsel."}];
+ {id:"R-W-001",t:"W",src:["W1-016a"],req:{origin:["joined"]},area:["temperament","work"],g:"a careful, thoughtful nature",h:"Careful by nature",
+  you:"You like to think things through before you act. You may sometimes underestimate how capable you really are.",
+  they:"Cheiro would see a careful, thoughtful person here: someone who thinks before acting and may underrate their own abilities."},
+ {id:"R-W-002",t:"W",src:["W2-429a"],req:{origin:["joined"]},area:["temperament"],g:null,h:"A second view of the same sign",
+  you:"Another palmist, Benham, reads it a little differently: you value other people's advice and like to check with them before deciding.",
+  they:"Benham reads the same sign as someone who values advice and checks with others before deciding."},
+ {id:"R-W-004",t:"W",src:["W1-019a"],req:{origin:["gap"]},area:["temperament","work"],g:"an independent mind",h:"An independent thinker",
+  you:"You trust your own judgement, make up your mind quickly and are willing to back your own ideas.",
+  they:"An independent thinker: quick to decide and willing to back their own ideas."},
+ {id:"R-W-005a",t:"W",src:["W1-pviii"],req:{thumb:["long"]},area:["temperament"],g:"strong willpower",h:"Strong willpower",
+  you:"Once you make up your mind, you follow through.",they:"Read as strong willpower: once decided, this person follows through."},
+ {id:"R-W-005b",t:"W",src:["W1-pviii"],req:{thumb:["short"]},area:["temperament"],g:"plenty of drive",h:"Driven and persistent",
+  you:"You get things done through energy and persistence more than careful planning.",they:"Read as someone who gets things done through energy and persistence."},
+ {id:"R-W-006",t:"W",src:["W1-067a"],req:{heart:["clear","faint"]},area:["relationships"],g:"a warm emotional side",h:"The emotional side",
+  you:"Your heart line is about how you feel and how you care for the people close to you. Western palmists read it as your emotional nature, not your health.",
+  they:"The heart line speaks of the emotional nature: how this person felt and cared for those close to them."},
+ {id:"R-W-007",t:"W",src:["W1-047a"],req:{vertical:["yes"]},area:["work"],g:"a sense of direction in work",h:"A path in work",
+  you:"The line running up the middle of your palm is linked with your working life: a sense of having a direction in your career.",
+  they:"The line running up the middle of the palm is linked with the course of a working life."},
+ {id:"R-I-001",t:"I",src:["I1-68.43"],req:{depth:["deep"]},area:["prosperity"],g:"signs of good fortune",h:"Deep, clear lines",
+  you:"Indian palmistry sees deep, well-formed lines as a lucky sign, linked with prosperity.",they:"Deep, well-formed lines are seen as a lucky sign, linked with prosperity."},
+ {id:"R-I-003",t:"I",src:["I1-68.36"],req:{fingers:["long"]},area:["prosperity","relationships"],g:"a comfortable life",h:"Long fingers",
+  you:"Long fingers are linked with a comfortable, settled life.",they:"Long fingers are linked with a comfortable, settled life."},
+ {id:"R-I-004",t:"I",src:["I2-39-41"],req:{bracelets:[1,2,3]},wrist:true,area:["prosperity","status"],
+  g:b=>({3:"signs of respect and standing",2:"the mark of a trusted adviser",1:"signs of prosperity"})[b],
+  h:b=>({3:"Three clear lines at the wrist",2:"Two clear lines at the wrist",1:"A clear line at the wrist"})[b],
+  you:b=>({3:"Three clear lines at the wrist are one of the luckiest signs in Indian palmistry, linked with respect and high standing.",2:"Two clear lines at the wrist are linked with being a trusted adviser, respected for good judgement.",1:"A clear line at the wrist is linked with prosperity."})[b]},
+ {id:"R-I-005",t:"I",src:["Z25-HS3.2.80"],req:{reaches:["forefinger","middle"]},area:["work","status"],
+  g:r=>r==="middle"?"a pull toward leadership":"a natural authority",
+  h:r=>r==="middle"?"A line rising toward the middle finger":"A line rising toward the forefinger",
+  you:r=>r==="middle"?"The line rising toward your middle finger is linked with leadership and being recognised for your work.":"The line rising toward your forefinger is linked with authority, and with being someone others turn to for advice.",
+  they:r=>r==="middle"?"A line rising toward the middle finger is linked with leadership and being recognised for one's work.":"A line rising toward the forefinger is linked with authority, and with being someone others turn to for advice."}];
 /* ====== GUIDED STEPS ====== */
 const D=(paths)=>`<svg viewBox="0 0 100 120"><path d="M28 118 C 24 100,22 82,25 70 L 14 52 C 10 46,17 41,22 46 L 31 58 L 31 22 C 31 16,40 16,40 22 L 42 52 L 45 12 C 46 5,55 5,55 12 L 56 50 L 60 18 C 61 11,70 12,69 19 L 66 54 L 75 32 C 77 26,85 29,83 35 L 79 68 C 82 86,82 102,80 118" fill="#1d2a25" stroke="#5f7a6d" stroke-width="1.4"/>${paths}</svg>`;
 const L={life:'<path d="M30 72 C 27 88,30 102,42 112" stroke="#8fbbe6" stroke-width="2.4" fill="none"/>',head:'<path d="M30 72 C 42 68,58 68,76 76" stroke="#8fbbe6" stroke-width="2.4" fill="none"/>',heart:'<path d="M79 62 C 66 57,50 58,36 64" stroke="#e8a24a" stroke-width="2.4" fill="none"/>',vert:'<path d="M54 116 C 54 98,53 78,51 56" stroke="#f0c987" stroke-width="2.4" fill="none"/>',wrist:'<path d="M30 110 Q 54 114 78 110 M31 115 Q 54 119 78 115" stroke="#f0c987" stroke-width="1.6" fill="none"/>'};
@@ -343,43 +366,38 @@ function drawOverlay(svg,activeK){ let h=""; for(const [k,p] of Object.entries(S
 function evaluate(){ const a=S.ans; return RULES.map(r=>{ if(r.wrist&&!S.wrist) return {r,ok:false,why:"wrist"};
   for(const [k,vals] of Object.entries(r.req)){ const v=a[k]; if(v===undefined||v==="unsure") return {r,ok:false,why:"unsure",k}; if(!vals.includes(v)) return {r,ok:false,why:"na"}; }
   return {r,ok:true}; }); }
-const val=(r,k)=>S.ans[k];
-function claimText(r){ const arg=r.id==="R-I-004"?S.ans.bracelets:r.id==="R-I-005"?S.ans.reaches:null; return {h:typeof r.h==="function"?r.h(arg):r.h, t:typeof r.txt==="function"?r.txt(arg):r.txt}; }
+const isFam=()=>typeof S.sample==="string";
+function claimText(r){ const arg=r.id==="R-I-004"?S.ans.bracelets:r.id==="R-I-005"?S.ans.reaches:null; const f=x=>typeof x==="function"?x(arg):x;
+ return {h:f(r.h), t:f(isFam()&&r.they?r.they:r.you), g:f(r.g)}; }
 const FOCI=[["overall","Overall"],["work","Work & direction"],["temperament","Temperament"],["relationships","Affection"],["prosperity","Prosperity"],["status","Standing"]];
+function listJoin(a){ return a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1]; }
 function renderResults(){ show("s-result"); $("#resImg").src=S.photo||sampleImg(); drawOverlay($("#resSvg"),null);
- const F=typeof S.sample==="string"?FAMOUS[S.sample]:null;
- $("#resEyebrow").textContent=F?"Palm reading · from the archive":"Your palm reading";
- $("#resTitle").textContent=F?`The hand of ${F.name}`:"Read in two traditions";
- $("#resSub").innerHTML=F?`${F.field} · ${F.when} · ink impression (mirror image)<div class="credit">${F.credit}${F.note?"<br>"+F.note:""}</div>`:`${S.sample?"Sample reading · ":""}${S.hand==="right"?"Right":"Left"} hand · ${S.hand===S.dom?"your dominant hand":"your non-dominant hand"}`;
+ const F=isFam()?FAMOUS[S.sample]:null;
+ $("#resEyebrow").textContent=F?"From the archive":"Your palm reading";
+ $("#resTitle").textContent=F?`The hand of ${F.name}`:"What your palm says";
+ $("#resSub").innerHTML=F?`${F.field} · ${F.when}<div class="credit">${F.credit}. An ink print is a mirror image of the hand.${F.note?"<br>"+F.note:""}</div>`:`${S.sample?"Sample reading · ":""}${S.hand==="right"?"Right":"Left"} hand${S.hand===S.dom?" (the one you write with)":""}`;
  $("#tabs").innerHTML=FOCI.map(([k,l])=>`<button class="${k===S.focus?'on':''}" data-f="${k}">${l}</button>`).join("");
  $$("#tabs button").forEach(b=>b.onclick=()=>{S.focus=b.dataset.f;renderResults();});
- const ev=evaluate(); const inF=r=>S.focus==="overall"||r.area.includes(S.focus);
- const box=(t,name,src)=>{ const ok=ev.filter(e=>e.ok&&e.r.t===t&&inF(e.r));
+ const ev=evaluate(); const inF=r=>S.focus==="overall"||r.area.includes(S.focus); const ok=ev.filter(e=>e.ok&&inF(e.r));
+ const gists=[...new Set(ok.map(e=>claimText(e.r).g).filter(Boolean))].slice(0,5);
+ $("#glance").textContent= gists.length ? `${F?"This hand":"Your palm"} points to ${listJoin(gists)}.` : (F?"The print is too faint to say much about this theme.":"We couldn't see enough clearly to say much about this. Try a brighter, sharper photo.");
+ const box=(t,name,src)=>{ const mine=ok.filter(e=>e.r.t===t);
   let h=`<h3>${name}</h3><div class="src">${src}</div>`;
-  h+= ok.length? ok.map(({r})=>{const c=claimText(r);return `<div class="claim"><div class="h">${c.h}</div><p>${c.t}</p><div class="by">${r.sch}</div><details><summary>Read the source</summary>${r.src.map(p=>`<blockquote>“${Q[p][1]}”</blockquote><div class="tiny">${Q[p][0]}</div>`).join("")}</details></div>`;}).join("")
-   : `<p class="muted">${S.focus==="overall"?"This tradition's texts don't comment on the features we could read.":"This tradition's texts don't speak to this theme for your hand."} We never borrow from the other tradition to fill the gap.</p>`;
+  h+= mine.length? mine.map(({r})=>{const c=claimText(r);return `<div class="claim"><div class="h">${c.h}</div><p>${c.t}</p><details><summary>Where this comes from</summary>${r.src.map(p=>`<blockquote>“${Q[p][1]}”</blockquote><div class="tiny">${Q[p][0]}</div>`).join("")}</details></div>`;}).join("")
+   : `<p class="muted">${name} has nothing to add about the parts of ${F?"this":"your"} hand we could see clearly.</p>`;
   return h; };
- $("#rInd").innerHTML=box("I","Indian","Bṛhatsaṃhitā · Hastasañjīvana"); $("#rWes").innerHTML=box("W","Western","Cheiro · Benham");
- if(typeof S.sample==="string") ["#rInd","#rWes"].forEach(s=>$(s).innerHTML=$(s).innerHTML.replace(/\byour hand\b/g,"this hand").replace(/\byour\b/g,"the"));
+ $("#rInd").innerHTML=box("I","Indian palmistry","From the classical Sanskrit palm books");
+ $("#rWes").innerHTML=box("W","Western palmistry","From the palmists Cheiro and Benham, around 1900");
  renderSyn(ev); initChat(); }
-function renderSyn(ev){ const ok=id=>ev.find(e=>e.r.id===id)?.ok; const it=[];
- if(ok("R-W-001")&&ok("R-W-002")) it.push(["Two Western views","Cheiro and Benham both comment on the joined start of your head line, and they see it differently: Cheiro sees care and caution, Benham a habit of seeking advice. We show both rather than choosing."]);
- if(ok("R-W-004")) it.push(["Western","Your head and life lines start apart, which Cheiro counts among the better marks for independent thinking."]);
- if(ok("R-W-007")&&ok("R-I-005")) it.push(["A shared line","Both traditions pay attention to the line rising up your palm and connect it with the course of your work. They name it differently (the line of destiny; the ūrdhvarekhā) and read it in their own ways."]);
- else if(ok("R-W-007")) it.push(["Western","Cheiro reads your rising line in terms of career; the Indian reading depends on where it ends, which points elsewhere for your hand."]);
- if(ok("R-I-004")) it.push(["Indian","The bracelets at your wrist are read only in the Indian texts; the Western books here are silent on them."]);
- if(ok("R-I-001")||ok("R-I-003")) it.push(["Indian","The quality of your lines and the length of your fingers are read as auspicious signs in the Bṛhatsaṃhitā; the Western sources read the same features differently, or not at all."]);
- const un=STEPS.filter(s=>S.ans[s.k]==="unsure").map(s=>s.n);
- if(!S.wrist) un.push(typeof S.sample==="string"?"the wrist bracelets (wrist not shown)":"the wrist bracelets (wrist not in photo)");
+function renderSyn(ev){ const ok=id=>ev.find(e=>e.r.id===id)?.ok; const Y=isFam()?"this":"your"; const it=[];
+ if(ok("R-W-001")&&ok("R-W-002")) it.push(["They differ","Two Western palmists read the start of "+Y+" head line differently. One sees caution, the other someone who values advice. Both can be true at once."]);
+ if(ok("R-W-007")&&ok("R-I-005")) it.push(["They agree","Both traditions see the line rising up "+Y+" palm as a sign about working life and direction."]);
+ if(ok("R-I-004")) it.push(["Only Indian palmistry","Only the Indian tradition reads the lines at the wrist. Western palmists here don't comment on them."]);
+ if(ok("R-I-001")||ok("R-I-003")) it.push(["Only Indian palmistry","Only the Indian tradition gives meaning to how deep the lines are and how long the fingers are."]);
+ const un=STEPS.filter(s=>S.ans[s.k]==="unsure").map(s=>s.n); if(!S.wrist) un.push("the wrist lines");
  $("#syn").innerHTML=it.map(([k,t])=>`<div class="synItem"><div class="tag">${k}</div><div>${t}</div></div>`).join("")+
-  `<div class="synItem"><div class="tag">In sum</div><div><p class="reflect">${reflection(ev)}</p></div></div>`+
-  (un.length?`<div class="unread">Not read this time: ${un.join("; ")}. ${typeof S.sample==="string"?"The print is too faint or cropped there to say.":"A clearer photo can fill these in."}</div>`:"");
- if(typeof S.sample==="string") $("#syn").innerHTML=$("#syn").innerHTML.replace(/\bYour\b/g,"The").replace(/\byour\b/g,"the").replace("leave the question with you","leave the question open").replace("course of the work","course of a working life");
-}
-function reflection(ev){ const ok=id=>ev.find(e=>e.r.id===id)?.ok;
- if(ok("R-W-001")) return "Both traditions describe a hand that weighs things carefully. Where they differ is in how much that care comes from within, and how much from listening to others. That part is yours to answer.";
- if(ok("R-W-004")) return "The old books see in this hand an independent mind. Where they differ, they leave the meaning open for you to decide.";
- return "Each tradition finds something to say about this hand, and where they differ, they leave the question with you."; }
+  (un.length?`<div class="unread">${isFam()?"The print is too faint here to read":"We couldn't make out"}: ${listJoin(un)}.${isFam()?"":" A clearer photo would help."}</div>`:"");
+ $("#synCard").hidden=!it.length&&!un.length; }
 /* ====== Q&A (grounded in this reading) ====== */
 const BLOCK=[[/health|ill|disease|sick|die|death|lifespan|how long|accident|cancer/i,"I don't read health, lifespan or accidents. We leave those out by design."],
  [/marri|wife|husband|spouse|children|kids|son|daughter|baby|pregnan/i,"I don't predict marriage or children. I can tell you what the traditions say about your affectionate nature: try “What does my heart line say?”"],
@@ -390,8 +408,8 @@ const ROUTE=[[/work|career|job|business|profession|direction/i,["R-W-007","R-I-0
  [/temper|personal|character|think|decid|confiden|cautio|independ|nature/i,["R-W-001","R-W-002","R-W-004","R-W-005a","R-W-005b"]],[/love|affection|relation|emotion|heart/i,["R-W-006","R-I-003"]],
  [/status|authority|lead|power|standing|respect/i,["R-I-005","R-I-004"]],[/wrist|bracelet/i,["R-I-004"]],[/thumb|will/i,["R-W-005a","R-W-005b"]]];
 function answer(q){ for(const [re,m] of BLOCK) if(re.test(q)) return m; const ev=evaluate();
- for(const [re,ids] of ROUTE) if(re.test(q)){ const ok=ev.filter(e=>e.ok&&ids.includes(e.r.id)); if(!ok.length) return "Your reading doesn't include anything on that, usually because that feature wasn't clear in the photo. You could retake the photo or mark that step again.";
-  return ok.map(({r})=>{const c=claimText(r);return `<b>${r.t==="I"?"Indian":"Western"} · ${r.sch}:</b> ${c.t}`;}).join("<br><br>"); }
+ for(const [re,ids] of ROUTE) if(re.test(q)){ const ok=ev.filter(e=>e.ok&&ids.includes(e.r.id)); if(!ok.length) return "I couldn't see that part of your hand clearly enough to say. A sharper photo would help.";
+  return ok.map(({r})=>{const c=claimText(r);return `<b>${r.t==="I"?"Indian palmistry":"Western palmistry"}:</b> ${c.t}`;}).join("<br><br>"); }
  return "I can answer about your work, temperament, affection, prosperity or standing, from what was read in your palm."; }
 let chatOn=false;
 function say(c,h){const d=document.createElement("div");d.className="msg "+c;d.innerHTML=h;$("#chat").appendChild(d);$("#chat").scrollTop=1e6;}
